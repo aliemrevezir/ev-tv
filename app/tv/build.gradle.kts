@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.aliemrevezir.evtv"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.aliemrevezir.evtv"
