@@ -1,7 +1,7 @@
 # ev-tv — Tasarım
 
 Tarih: 2026-10-02
-Durum: Taslak (kullanıcı onayı bekleniyor)
+Durum: Onaylandı
 
 ## 1. Amaç
 
