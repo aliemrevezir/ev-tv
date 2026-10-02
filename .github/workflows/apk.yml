@@ -1,0 +1,51 @@
+name: APK
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "app/**"
+      - ".github/workflows/apk.yml"
+  workflow_dispatch:
+
+jobs:
+  derle:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: app
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Çekirdek testleri
+        run: ./gradlew -p cekirdek test
+
+      - name: İmza anahtarı
+        env:
+          IMZA_ANAHTARI: ${{ secrets.EVTV_IMZA_ANAHTARI }}
+        run: |
+          if [ -n "$IMZA_ANAHTARI" ]; then
+            echo "$IMZA_ANAHTARI" | base64 -d > "$RUNNER_TEMP/evtv.jks"
+            echo "EVTV_IMZA_DOSYASI=$RUNNER_TEMP/evtv.jks" >> "$GITHUB_ENV"
+          else
+            echo "::warning::EVTV_IMZA_ANAHTARI yok, debug anahtarıyla imzalanıyor"
+          fi
+
+      - name: APK derle
+        env:
+          EVTV_IMZA_SIFRESI: ${{ secrets.EVTV_IMZA_SIFRESI }}
+        run: ./gradlew :tv:assembleRelease
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ev-tv-${{ github.run_number }}
+          path: app/tv/build/outputs/apk/release/*.apk
+          if-no-files-found: error

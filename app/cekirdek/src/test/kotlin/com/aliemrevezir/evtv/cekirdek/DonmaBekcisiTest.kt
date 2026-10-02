@@ -45,9 +45,15 @@ class DonmaBekcisiTest {
     @Test
     fun `oynamaya baslayinca sayac sifirdan baslar`() {
         bekci.kanalBasladi(1)
-        bekle(0, 30_000, 0, oynuyor = false)
-        assertEquals(Karar.Devam, bekle(31_000, 35_000, 0))
-        assertEquals(Karar.YenidenBaslat, bekci.ornek(36_000, 0, true))
+        bekle(0, 30_000, 10, oynuyor = false)
+        assertEquals(Karar.Devam, bekle(31_000, 35_000, 10))
+        assertEquals(Karar.YenidenBaslat, bekci.ornek(36_000, 10, true))
+    }
+
+    @Test
+    fun `ilk kare gelmeden donma sayilmaz`() {
+        bekci.kanalBasladi(1)
+        assertEquals(Karar.Devam, bekle(0, 60_000, 0))
     }
 
     @Test

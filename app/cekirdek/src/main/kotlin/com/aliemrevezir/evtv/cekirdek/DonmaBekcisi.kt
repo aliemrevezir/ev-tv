@@ -5,7 +5,8 @@ package com.aliemrevezir.evtv.cekirdek
  * sayısı artmazsa donma sayılır. Aynı kanalda [pencereMs] içinde ikinci donmada
  * o kanal, nesne yaşadığı sürece yazılım (işlemci) çözücüye geçirilir.
  *
- * Saat dışarıdan verilir; her saniye [ornek] çağrılır.
+ * İlk kare gelmeden (kare sayısı 0) donma sayılmaz; açılmayan yayını
+ * [AcilisBekcisi] yönetir. Saat dışarıdan verilir; her saniye [ornek] çağrılır.
  */
 class DonmaBekcisi(
     private val esikMs: Long = 5_000,
@@ -30,7 +31,7 @@ class DonmaBekcisi(
 
     fun ornek(zamanMs: Long, kareSayisi: Int, oynuyor: Boolean): Karar {
         val ilerleme = sonIlerleme
-        if (!oynuyor) {
+        if (!oynuyor || kareSayisi == 0) {
             sonIlerleme = null
             return Karar.Devam
         }
