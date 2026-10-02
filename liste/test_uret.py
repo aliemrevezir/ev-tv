@@ -289,3 +289,12 @@ def test_kaydet_kanallar_degistiyse_yazar(tmp_path):
     assert uret.kaydet(yol, yeni)
     assert json.loads(yol.read_text(encoding="utf-8")) == yeni
     assert "Ç" in yol.read_text(encoding="utf-8")
+
+
+def test_adaylari_birlestir_tekrari_atar_logoyu_tamamlar():
+    a = {"X.tr": [aday("https://1"), aday("https://2", "logo-a")]}
+    b = {"X.tr": [aday("https://1", "logo-b"), aday("https://3")], "Y.tr": [aday("https://4")]}
+    assert uret.adaylari_birlestir([a, b]) == {
+        "X.tr": [aday("https://1", "logo-b"), aday("https://2", "logo-a"), aday("https://3")],
+        "Y.tr": [aday("https://4")],
+    }

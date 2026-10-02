@@ -138,6 +138,7 @@ def adres_dene(adres: str, indir: Indirici) -> tuple[str, Optional[str]]:
     if master_mi(yanit.metin):
         basamaklar = basamaklari_ayristir(yanit.metin, yanit.adres)
         if not basamaklar:
+            log.info("  %s: master'da basamak yok", adres)
             return "hata", None
         secilen = basamak_sec(basamaklar).adres
         yanit = _indir(secilen, indir)
@@ -172,6 +173,8 @@ def kanal_isle(no: int, kayit: dict, iptv_org: dict[str, list[Aday]],
     dogrulanamadi = None
     for aday in adaylar:
         durum, adres = adres_dene(aday.adres, indir)
+        if adres:
+            log.info("  %s: %s", durum, adres)
         if durum == "ok":
             return _kanal(no, kayit, adres, aday.logo or ilk_logo, "ok")
         if durum == "dogrulanamadi" and dogrulanamadi is None:
@@ -238,13 +241,33 @@ def http_indirici() -> Indirici:
     return indir
 
 
+def adaylari_birlestir(listeler: list[dict[str, list[Aday]]]) -> dict[str, list[Aday]]:
+    """Aynı adres bir kez; sıra korunur; logosuz kayda diğer kaynaktaki logo eklenir."""
+    sonuc: dict[str, list[Aday]] = {}
+    for liste in listeler:
+        for tvg_id, adaylar in liste.items():
+            mevcut = sonuc.setdefault(tvg_id, [])
+            for aday in adaylar:
+                i = next((i for i, m in enumerate(mevcut) if m.adres == aday.adres), None)
+                if i is None:
+                    mevcut.append(aday)
+                elif not mevcut[i].logo and aday.logo:
+                    mevcut[i] = aday
+    return sonuc
+
+
 def iptv_org_indir(indir: Indirici) -> dict[str, list[Aday]]:
+    listeler = []
     for kaynak in IPTV_ORG_KAYNAKLARI:
         yanit = _indir(kaynak, indir)
         if yanit and yanit.durum_kodu == 200:
             log.info("iptv-org listesi: %s", kaynak)
-            return m3u_ayristir(yanit.metin)
-    raise RuntimeError("iptv-org listesi indirilemedi")
+            listeler.append(m3u_ayristir(yanit.metin))
+        else:
+            log.warning("iptv-org listesi indirilemedi: %s", kaynak)
+    if not listeler:
+        raise RuntimeError("iptv-org listesi indirilemedi")
+    return adaylari_birlestir(listeler)
 
 
 class _Toplayici(logging.Handler):
