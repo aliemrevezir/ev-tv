@@ -29,14 +29,14 @@
 - ad: "360"
   iptv_org: 360.tr
 - ad: TRT 2
-  iptv_org: TRT2.tr
-  adres_filtresi: trt.com.tr
+  # Bölge kısıtlı (ABD'den doğrulanamıyor); diğer TRT kanallarıyla aynı kalıp.
+  adres: https://tv-trt2.medya.trt.com.tr/master_720.m3u8
 - ad: TRT Belgesel
-  iptv_org: TRTBelgesel.tr
-  adres_filtresi: trt.com.tr
+  # Bölge kısıtlı (ABD'den doğrulanamıyor); diğer TRT kanallarıyla aynı kalıp.
+  adres: https://tv-trtbelgesel.medya.trt.com.tr/master_720.m3u8
 - ad: TRT Çocuk
-  iptv_org: TRTCocuk.tr
-  adres_filtresi: trt.com.tr
+  # Bölge kısıtlı (ABD'den doğrulanamıyor); diğer TRT kanallarıyla aynı kalıp.
+  adres: https://tv-trtcocuk.medya.trt.com.tr/master_720.m3u8
 - ad: TRT Müzik
   iptv_org: TRTMuzik.tr
   adres_filtresi: trt.com.tr
