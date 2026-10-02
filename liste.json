@@ -1,6 +1,6 @@
 {
   "surum": 1,
-  "uretildi": "2026-10-02T18:46:12Z",
+  "uretildi": "2026-10-02T18:47:18Z",
   "kanallar": [
     {
       "no": 1,
@@ -12,14 +12,14 @@
     {
       "no": 2,
       "ad": "ATV",
-      "adres": "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/atv/atv_1080p.m3u8",
+      "adres": "http://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/atv/atv_360p.m3u8",
       "logo": "https://i.imgur.com/HyVUwFC.png",
       "durum": "ok"
     },
     {
       "no": 3,
       "ad": "Kanal D",
-      "adres": "https://demiroren.daioncdn.net/kanald/kanald_720p.m3u8?&sid=8sut51yzsf7s&app=da2109ea-5dfe-4107-89ab-23593336ed61&ce=3",
+      "adres": "https://demiroren.daioncdn.net/kanald/kanald_720p.m3u8?&sid=8sut93lxkyvk&app=da2109ea-5dfe-4107-89ab-23593336ed61&ce=3",
       "logo": "https://i.imgur.com/9o1atM6.png",
       "durum": "ok"
     },
@@ -35,13 +35,20 @@
       "ad": "NOW",
       "adres": "https://uycyyuuzyh.turknet.ercdn.net/nphindgytw/nowtv/nowtv_720p.m3u8",
       "logo": "https://i.imgur.com/5EYjWK7.png",
-      "durum": "ok"
+      "durum": "eski"
     },
     {
       "no": 6,
       "ad": "TV8",
-      "adres": "https://tv8.daioncdn.net/tv8/tv8_720p.m3u8?&sid=8sut593g3xs3&app=7ddc255a-ef47-4e81-ab14-c0e5f2949788&ce=3",
+      "adres": "https://tv8.daioncdn.net/tv8/tv8_720p.m3u8?&sid=8sut9sznecc7&app=7ddc255a-ef47-4e81-ab14-c0e5f2949788&ce=3",
       "logo": "https://upload.wikimedia.org/wikipedia/tr/thumb/6/68/Tv8_Yeni_Logo.png/960px-Tv8_Yeni_Logo.png",
+      "durum": "ok"
+    },
+    {
+      "no": 7,
+      "ad": "Kanal 7",
+      "adres": "https://kanal7-live.daioncdn.net/kanal7/kanal7_720p.m3u8",
+      "logo": "https://i.imgur.com/0gq9xOm.png",
       "durum": "ok"
     },
     {
@@ -56,6 +63,13 @@
       "ad": "TRT 2",
       "adres": "https://tv-trt2.medya.trt.com.tr/master.m3u8",
       "logo": "https://i.imgur.com/iOCQdyD.png",
+      "durum": "dogrulanamadi"
+    },
+    {
+      "no": 11,
+      "ad": "TRT Belgesel",
+      "adres": "https://tv-trtbelgesel.medya.trt.com.tr/master.m3u8",
+      "logo": null,
       "durum": "dogrulanamadi"
     },
     {
@@ -89,7 +103,7 @@
     {
       "no": 16,
       "ad": "NTV",
-      "adres": "https://dogus.daioncdn.net/ntv/ntv_720p.m3u8?&sid=8sut5ikofgsd&app=c68bddbe-3dbf-49f7-892a-93de5ae37f1f&ce=2",
+      "adres": "https://dogus.daioncdn.net/ntv/ntv_720p.m3u8?&sid=8suta6cltudm&app=c68bddbe-3dbf-49f7-892a-93de5ae37f1f&ce=2",
       "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/NTV_%28Turkey%29_logo.svg/960px-NTV_%28Turkey%29_logo.svg.png",
       "durum": "ok"
     },
