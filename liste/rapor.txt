@@ -1,0 +1,34 @@
+Üretildi: 2026-10-02T18:46:12Z
+
+iptv-org listesi: https://iptv-org.github.io/iptv/countries/tr.m3u
+1. TRT 1
+2. ATV
+3. Kanal D
+4. Star TV
+5. NOW
+6. TV8
+7. Kanal 7
+  https://kanal7.blutv.com/blutv_kanal7_live/live.m3u8: SSLError
+Kanal 7: çalışan adres yok, listeye alınmadı
+8. Beyaz TV
+  https://mn-nl.mncdn.com/blutv_beyaztv2/live.m3u8: ConnectionError
+Beyaz TV: çalışan adres yok, listeye alınmadı
+9. 360
+10. TRT 2
+11. TRT Belgesel
+TRT Belgesel: iptv-org'da aday adres yok (TRTBelgesel.tr)
+TRT Belgesel: çalışan adres yok, listeye alınmadı
+12. TRT Çocuk
+13. TRT Müzik
+14. TRT Haber
+15. A Haber
+16. NTV
+17. Halk TV
+18. TGRT Haber
+19. TVNET
+  https://tvnet-live.lg.mncdn.com/tvnet/tvnet/playlist.m3u8: HTTP 404
+TVNET: çalışan adres yok, listeye alınmadı
+20. 24 TV
+21. Bloomberg HT
+Toplam 17/21 kanal: {'ok': 14, 'dogrulanamadi': 3}
+liste.json güncellendi
