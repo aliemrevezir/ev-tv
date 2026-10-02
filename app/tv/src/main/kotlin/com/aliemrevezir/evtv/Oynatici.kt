@@ -15,7 +15,13 @@ class Oynatici(context: Context, goruntu: VLCVideoLayout, private val dinleyici:
         fun hataOldu()
     }
 
-    private val libVlc = LibVLC(context, arrayListOf("-vv", "--http-reconnect", "--network-caching=$ONBELLEK_MS"))
+    // Yazı işleyici (freetype) ilk görüntüde sistem fontlarını tarıyor; stick'te bu
+    // 20 sn'yi aşıyor ve görüntü hiç gelmiyor. Altyazı kullanmıyoruz, kapalı.
+    private val libVlc = LibVLC(
+        context,
+        arrayListOf("--text-renderer=none", "--http-reconnect", "--network-caching=$ONBELLEK_MS"),
+    )
+    private val vekil = YerelVekil(USER_AGENT)
 
     private val oynatici = MediaPlayer(libVlc).apply {
         attachViews(goruntu, null, false, false)
@@ -30,7 +36,7 @@ class Oynatici(context: Context, goruntu: VLCVideoLayout, private val dinleyici:
 
     /** @param donanimCozucu false ise görüntü işlemcide çözülür (MediaCodec kapalı). */
     fun oynat(adres: String, donanimCozucu: Boolean) {
-        val medya = Media(libVlc, Uri.parse(adres))
+        val medya = Media(libVlc, Uri.parse(vekil.adres(adres)))
         medya.setHWDecoderEnabled(donanimCozucu, false)
         medya.addOption(":http-user-agent=$USER_AGENT")
         medya.addOption(":network-caching=$ONBELLEK_MS")
@@ -59,6 +65,7 @@ class Oynatici(context: Context, goruntu: VLCVideoLayout, private val dinleyici:
         oynatici.detachViews()
         oynatici.release()
         libVlc.release()
+        vekil.kapat()
     }
 
     private companion object {
