@@ -49,18 +49,6 @@
         android:textSize="28sp"
         android:visibility="gone" />
 
-    <TextView
-        android:id="@+id/cikis_uyarisi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginBottom="48dp"
-        android:background="@drawable/kutu"
-        android:padding="16dp"
-        android:text="@string/cikis_uyarisi"
-        android:textColor="@android:color/white"
-        android:textSize="24sp"
-        android:visibility="gone" />
 
     <LinearLayout
         android:id="@+id/panel"

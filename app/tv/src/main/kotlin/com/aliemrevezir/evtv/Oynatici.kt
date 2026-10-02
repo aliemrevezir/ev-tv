@@ -15,7 +15,7 @@ class Oynatici(context: Context, goruntu: VLCVideoLayout, private val dinleyici:
         fun hataOldu()
     }
 
-    private val libVlc = LibVLC(context, arrayListOf("--http-reconnect", "--network-caching=$ONBELLEK_MS"))
+    private val libVlc = LibVLC(context, arrayListOf("-vv", "--http-reconnect", "--network-caching=$ONBELLEK_MS"))
 
     private val oynatici = MediaPlayer(libVlc).apply {
         attachViews(goruntu, null, false, false)

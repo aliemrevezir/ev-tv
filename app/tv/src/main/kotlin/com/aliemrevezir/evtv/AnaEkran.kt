@@ -1,7 +1,11 @@
 package com.aliemrevezir.evtv
 
 import android.app.Activity
+import android.content.ActivityNotFoundException
+import android.content.ComponentName
+import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import android.os.Handler
 import android.os.Looper
 import android.os.SystemClock
@@ -20,6 +24,7 @@ import com.aliemrevezir.evtv.cekirdek.DonmaBekcisi
 import com.aliemrevezir.evtv.cekirdek.Kanal
 import com.aliemrevezir.evtv.cekirdek.KanalListesi
 import com.aliemrevezir.evtv.cekirdek.KanalSecici
+import com.aliemrevezir.evtv.cekirdek.UcluBasis
 import org.videolan.libvlc.util.VLCVideoLayout
 import java.io.File
 import java.util.concurrent.ExecutorService
@@ -41,17 +46,16 @@ class AnaEkran : Activity(), Oynatici.Dinleyici {
     private lateinit var logo: ImageView
     private lateinit var kanalAdi: TextView
     private lateinit var mesaj: TextView
-    private lateinit var cikisUyarisi: TextView
     private lateinit var panel: View
     private lateinit var listeGorunumu: ListView
     private lateinit var listeUyarlayici: KanalUyarlayici
 
+    private val homeSayaci = UcluBasis()
+
     private var calisiyor = false
-    private var sonGeriBasis = 0L
     private var sonGunluk = 0L
 
     private val kanalBilgisiniGizle = Runnable { kanalBilgisi.visibility = View.GONE }
-    private val cikisUyarisiniGizle = Runnable { cikisUyarisi.visibility = View.GONE }
     private val listeyiYenidenDene = Runnable { listeyiTazele() }
     private val tik = object : Runnable {
         override fun run() {
@@ -69,7 +73,6 @@ class AnaEkran : Activity(), Oynatici.Dinleyici {
         logo = findViewById(R.id.logo)
         kanalAdi = findViewById(R.id.kanal_adi)
         mesaj = findViewById(R.id.mesaj)
-        cikisUyarisi = findViewById(R.id.cikis_uyarisi)
         panel = findViewById(R.id.panel)
         listeGorunumu = findViewById(R.id.kanal_listesi)
 
@@ -239,28 +242,38 @@ class AnaEkran : Activity(), Oynatici.Dinleyici {
             KeyEvent.KEYCODE_DPAD_DOWN, KeyEvent.KEYCODE_CHANNEL_DOWN -> kanalDegistir { it.onceki() }
             KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER,
             KeyEvent.KEYCODE_NUMPAD_ENTER, KeyEvent.KEYCODE_MENU -> panelAc()
-            KeyEvent.KEYCODE_BACK -> geriBasildi()
+            // Ev TV ana ekran: Geri ile çıkılırsa boş ekran kalır, yutulur.
+            KeyEvent.KEYCODE_BACK -> Unit
             else -> return super.onKeyDown(keyCode, event)
         }
         return true
+    }
+
+    // Home tuşu uygulamaya tuş olarak gelmez; ana ekran olduğumuz için yeni intent gelir.
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        if (!intent.hasCategory(Intent.CATEGORY_HOME)) return
+        panelKapat()
+        if (homeSayaci.basildi(SystemClock.elapsedRealtime())) eskiAnaEkraniAc()
+    }
+
+    private fun eskiAnaEkraniAc() {
+        Log.i(ETIKET, "Home x3: eski ana ekran açılıyor")
+        val niyet = Intent(Intent.ACTION_MAIN)
+            .setComponent(ComponentName(ESKI_ANA_EKRAN_PAKETI, ESKI_ANA_EKRAN_ETKINLIGI))
+            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        try {
+            startActivity(niyet)
+        } catch (e: ActivityNotFoundException) {
+            Log.w(ETIKET, "Eski ana ekran yok, ayarlar açılıyor: $e")
+            startActivity(Intent(Settings.ACTION_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+        }
     }
 
     private fun kanalDegistir(adim: (KanalSecici) -> Kanal) {
         val s = secici ?: return
         adim(s)
         oynat(yeniKanal = true)
-    }
-
-    private fun geriBasildi() {
-        val simdi = SystemClock.elapsedRealtime()
-        if (simdi - sonGeriBasis < CIKIS_SURESI_MS) {
-            finish()
-            return
-        }
-        sonGeriBasis = simdi
-        cikisUyarisi.visibility = View.VISIBLE
-        anaIs.removeCallbacks(cikisUyarisiniGizle)
-        anaIs.postDelayed(cikisUyarisiniGizle, CIKIS_SURESI_MS)
     }
 
     private fun panelAc() {
@@ -315,7 +328,8 @@ class AnaEkran : Activity(), Oynatici.Dinleyici {
         const val LISTE_ADRESI = "https://raw.githubusercontent.com/aliemrevezir/ev-tv/main/liste.json"
         const val YENIDEN_DENEME_MS = 10_000L
         const val KANAL_BILGISI_MS = 3_000L
-        const val CIKIS_SURESI_MS = 3_000L
+        const val ESKI_ANA_EKRAN_PAKETI = "com.google.android.tvlauncher"
+        const val ESKI_ANA_EKRAN_ETKINLIGI = "com.google.android.tvlauncher.MainActivity"
         const val GUNLUK_ARALIGI_MS = 30_000L
     }
 }
