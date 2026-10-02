@@ -80,6 +80,31 @@ class ListeKirpiciTest {
     }
 
     @Test
+    fun `segment anahtar ve baslangic bolumu adresleri parca donusumunden gecer`() {
+        val metin = """
+            #EXTM3U
+            #EXT-X-MEDIA-SEQUENCE:0
+            #EXT-X-MAP:URI="baslangic.mp4"
+            #EXT-X-KEY:METHOD=AES-128,URI="anahtar"
+            #EXTINF:6,
+            a.ts
+
+        """.trimIndent()
+        assertEquals(
+            """
+            #EXTM3U
+            #EXT-X-MEDIA-SEQUENCE:0
+            #EXT-X-MAP:URI="P(https://cdn.ornek/kanal/baslangic.mp4)"
+            #EXT-X-KEY:METHOD=AES-128,URI="P(https://cdn.ornek/kanal/anahtar)"
+            #EXTINF:6,
+            P(https://cdn.ornek/kanal/a.ts)
+
+            """.trimIndent(),
+            ListeKirpici.kirp(metin, taban, tut = 3, vekil) { "P($it)" },
+        )
+    }
+
+    @Test
     fun `ana listedeki alt listeler vekile yonlendirilir`() {
         val metin = """
             #EXTM3U

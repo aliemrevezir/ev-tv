@@ -9,7 +9,8 @@ import java.net.URI
  *
  * Canlı listede yalnızca son [tut] segment kalır; tüm adresler mutlak yapılır
  * (liste artık yerel vekilden geliyor). Ana listedeki alt listeler [vekil]
- * üzerinden yönlendirilir ki onlar da kırpılsın.
+ * üzerinden yönlendirilir ki onlar da kırpılsın; segment, anahtar ve başlangıç
+ * bölümü adresleri [parca] ile dönüştürülür.
  */
 object ListeKirpici {
 
@@ -22,13 +23,19 @@ object ListeKirpici {
 
     private class Segment(val satirlar: List<String>)
 
-    fun kirp(metin: String, taban: String, tut: Int, vekil: (String) -> String): String {
+    fun kirp(
+        metin: String,
+        taban: String,
+        tut: Int,
+        vekil: (String) -> String,
+        parca: (String) -> String = { it },
+    ): String {
         val tabanUri = URI(taban)
         val satirlar = metin.lines().map { it.trimEnd() }.filter { it.isNotEmpty() }
         val sonuc = if (satirlar.any { it.startsWith("#EXT-X-STREAM-INF") }) {
             anaListe(satirlar, tabanUri, vekil)
         } else {
-            medyaListesi(satirlar, tabanUri, tut)
+            medyaListesi(satirlar, tabanUri, tut, parca)
         }
         return sonuc.joinToString("\n", postfix = "\n")
     }
@@ -42,7 +49,7 @@ object ListeKirpici {
             }
         }
 
-    private fun medyaListesi(satirlar: List<String>, taban: URI, tut: Int): List<String> {
+    private fun medyaListesi(satirlar: List<String>, taban: URI, tut: Int, parca: (String) -> String): List<String> {
         val baslik = satirlar.takeWhile { s -> LISTE_DUZEYI.any { s.startsWith(it) } }.toMutableList()
         val govde = satirlar.drop(baslik.size)
         val son = govde.filter { it.startsWith("#EXT-X-ENDLIST") }
@@ -77,9 +84,9 @@ object ListeKirpici {
 
         val segmentSatirlari = kalanlar.flatMap { it.satirlar }.map { satir ->
             when {
-                !satir.startsWith("#") -> mutlak(taban, satir)
+                !satir.startsWith("#") -> parca(mutlak(taban, satir))
                 satir.startsWith("#EXT-X-KEY") || satir.startsWith("#EXT-X-MAP") ->
-                    uriAlanlari(satir) { mutlak(taban, it) }
+                    uriAlanlari(satir) { parca(mutlak(taban, it)) }
                 else -> satir
             }
         }

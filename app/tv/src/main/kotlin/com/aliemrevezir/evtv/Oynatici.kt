@@ -27,7 +27,9 @@ class Oynatici(context: Context, private val goruntu: VLCVideoLayout, private va
         context,
         arrayListOf("--text-renderer=none", "--http-reconnect", "--network-caching=$ONBELLEK_MS"),
     )
-    private val vekil = YerelVekil(USER_AGENT)
+    private val vekil = context.applicationContext.let { uygulama ->
+        YerelVekil(USER_AGENT) { EkKokler.soketFabrikasi(uygulama) }
+    }
 
     private val oynatici = MediaPlayer(libVlc).apply {
         setEventListener { olay ->
