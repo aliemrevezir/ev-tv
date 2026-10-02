@@ -190,8 +190,10 @@ class AnaEkran : Activity(), Oynatici.Dinleyici {
     private fun bekcileriCalistir() {
         if (secici == null) return
         val simdi = SystemClock.elapsedRealtime()
+        // Değerler bir önceki saniyenin örneği; okuma VLC'yi beklemez.
         val kare = oynatici.kareSayisi()
         val oynuyor = oynatici.oynuyor()
+        oynatici.ornekle()
         if (kare > 0 && oynuyor) goruntuGeldi()
 
         when (acilisBekcisi.ornek(simdi)) {

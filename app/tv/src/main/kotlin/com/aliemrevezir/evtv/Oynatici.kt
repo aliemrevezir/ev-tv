@@ -6,9 +6,15 @@ import org.videolan.libvlc.LibVLC
 import org.videolan.libvlc.Media
 import org.videolan.libvlc.MediaPlayer
 import org.videolan.libvlc.util.VLCVideoLayout
+import java.util.concurrent.Executors
+import java.util.concurrent.atomic.AtomicBoolean
+import java.util.concurrent.atomic.AtomicInteger
 
-/** libVLC sarmalayıcı. Olaylar ana iş parçacığında gelir. */
-class Oynatici(context: Context, goruntu: VLCVideoLayout, private val dinleyici: Dinleyici) {
+/**
+ * libVLC sarmalayıcı. Olaylar ana iş parçacığında gelir; komutlar sırayla
+ * arka plandaki tek bir iş parçacığında çalışır, çağıran hiç beklemez.
+ */
+class Oynatici(context: Context, private val goruntu: VLCVideoLayout, private val dinleyici: Dinleyici) {
 
     interface Dinleyici {
         fun goruntuGeldi()
@@ -24,8 +30,9 @@ class Oynatici(context: Context, goruntu: VLCVideoLayout, private val dinleyici:
     private val vekil = YerelVekil(USER_AGENT)
 
     private val oynatici = MediaPlayer(libVlc).apply {
-        attachViews(goruntu, null, false, false)
         setEventListener { olay ->
+            // Son komut henüz işlenmediyse olay eski akıştandır.
+            if (isleyenNesil != nesil.get()) return@setEventListener
             when (olay.type) {
                 MediaPlayer.Event.Vout -> if (olay.voutCount > 0) dinleyici.goruntuGeldi()
                 MediaPlayer.Event.EncounteredError,
@@ -34,38 +41,108 @@ class Oynatici(context: Context, goruntu: VLCVideoLayout, private val dinleyici:
         }
     }
 
+    // setMedia/stop eski akışın kapanmasını bekler; akış takılınca dakikalarca
+    // sürebiliyor. Ana iş parçacığı kilitlenmesin diye tüm VLC çağrıları burada.
+    private val isci = Executors.newSingleThreadExecutor { Thread(it, "Oynatici") }
+
+    // Her oynat/durdur bir sonraki nesli başlatır; sırada bekleyen eski oynatmalar
+    // atlanır, eski medyadan gelen örnekler yok sayılır.
+    private val nesil = AtomicInteger()
+    @Volatile private var isleyenNesil = 0
+    private val ornekSirada = AtomicBoolean(false)
+    @Volatile private var sonKare = 0
+    @Volatile private var sonOynuyor = false
+
     /** @param donanimCozucu false ise görüntü işlemcide çözülür (MediaCodec kapalı). */
     fun oynat(adres: String, donanimCozucu: Boolean) {
-        val medya = Media(libVlc, Uri.parse(vekil.adres(adres)))
-        medya.setHWDecoderEnabled(donanimCozucu, false)
-        medya.addOption(":http-user-agent=$USER_AGENT")
-        medya.addOption(":network-caching=$ONBELLEK_MS")
-        oynatici.media = medya
-        medya.release()
-        oynatici.play()
+        gorunumuBagla()
+        val n = yeniNesil()
+        isci.execute {
+            if (n != nesil.get()) return@execute
+            val medya = Media(libVlc, Uri.parse(vekil.adres(adres)))
+            medya.setHWDecoderEnabled(donanimCozucu, false)
+            medya.addOption(":http-user-agent=$USER_AGENT")
+            medya.addOption(":network-caching=$ONBELLEK_MS")
+            oynatici.media = medya
+            medya.release()
+            isleyenNesil = n
+            oynatici.play()
+        }
     }
 
-    fun oynuyor(): Boolean = oynatici.isPlaying
+    /**
+     * [kareSayisi] ve [oynuyor] değerlerini arka planda tazeler; sonuç bir sonraki
+     * çağrıda görünür. Önceki örnek bitmeden yenisi sıraya girmez.
+     */
+    fun ornekle() {
+        if (!ornekSirada.compareAndSet(false, true)) return
+        isci.execute {
+            val n = nesil.get()
+            val kare = kareOku()
+            val oynuyor = oynatici.isPlaying
+            if (n == nesil.get()) {
+                sonKare = kare
+                sonOynuyor = oynuyor
+            }
+            ornekSirada.set(false)
+        }
+    }
+
+    fun oynuyor(): Boolean = sonOynuyor
 
     /** O ana kadar gösterilen kare sayısı; medya değişince sıfırdan başlar. */
-    fun kareSayisi(): Int {
+    fun kareSayisi(): Int = sonKare
+
+    /** Etkinlik görünmez olunca çağrılır; dönüşte [oynat] görünümü yeniden bağlar. */
+    fun durdur() {
+        yeniNesil()
+        gorunumuAyir()
+        isci.execute { oynatici.stop() }
+    }
+
+    fun birak() {
+        yeniNesil()
+        oynatici.setEventListener(null)
+        gorunumuAyir()
+        isci.execute {
+            oynatici.stop()
+            oynatici.release()
+            libVlc.release()
+            vekil.kapat()
+        }
+        isci.shutdown()
+    }
+
+    // Yüzey etkinlik durunca yok olur; bağlı kalırsa dönüşte VLC görüntü
+    // çıkışı kuramıyor ve ekran siyah kalıyor. Görünümlere dokunduğu için
+    // ikisi de ana iş parçacığında çalışır.
+    private var bagli = false
+
+    private fun gorunumuBagla() {
+        if (bagli) return
+        oynatici.attachViews(goruntu, null, false, false)
+        bagli = true
+    }
+
+    private fun gorunumuAyir() {
+        if (!bagli) return
+        oynatici.detachViews()
+        bagli = false
+    }
+
+    private fun yeniNesil(): Int {
+        sonKare = 0
+        sonOynuyor = false
+        return nesil.incrementAndGet()
+    }
+
+    private fun kareOku(): Int {
         val medya = oynatici.media ?: return 0
         return try {
             medya.stats?.displayedPictures ?: 0
         } finally {
             medya.release()
         }
-    }
-
-    fun durdur() = oynatici.stop()
-
-    fun birak() {
-        oynatici.setEventListener(null)
-        oynatici.stop()
-        oynatici.detachViews()
-        oynatici.release()
-        libVlc.release()
-        vekil.kapat()
     }
 
     private companion object {

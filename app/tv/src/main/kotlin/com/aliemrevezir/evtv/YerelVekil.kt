@@ -45,7 +45,14 @@ class YerelVekil(private val userAgent: String) {
             } catch (e: IOException) {
                 return
             }
-            isciler.execute { soket.use { yanitla(it) } }
+            isciler.execute {
+                // Kanal değişince VLC bağlantıyı yarıda kapatır; yanıt yazılamaz, sorun değil.
+                try {
+                    soket.use { yanitla(it) }
+                } catch (e: IOException) {
+                    Log.d(ETIKET, "Vekil: bağlantı kapandı: $e")
+                }
+            }
         }
     }
 
