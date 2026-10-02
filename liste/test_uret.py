@@ -238,6 +238,7 @@ def test_kanal_isle_iptv_orgda_yoksa_eskiye_duser():
     {"ad": "X"},
     {"ad": "X", "iptv_org": "X.tr", "adres": "https://x"},
     {"iptv_org": "X.tr"},
+    {"ad": 360, "iptv_org": "360.tr"},
 ])
 def test_kanallari_dogrula_hatali(kayit):
     with pytest.raises(ValueError):

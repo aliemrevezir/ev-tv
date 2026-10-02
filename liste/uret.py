@@ -18,6 +18,7 @@ import yaml
 KOK = Path(__file__).resolve().parent.parent
 KANALLAR_YAML = KOK / "liste" / "kanallar.yaml"
 LISTE_JSON = KOK / "liste.json"
+RAPOR = KOK / "liste" / "rapor.txt"
 
 IPTV_ORG_KAYNAKLARI = [
     "https://iptv-org.github.io/iptv/countries/tr.m3u",
@@ -119,7 +120,7 @@ def _indir(adres: str, indir: Indirici) -> Optional[Yanit]:
     try:
         return indir(adres)
     except Exception as e:  # ağ hatası, zaman aşımı, bozuk yanıt
-        log.info("  %s: %s", adres, e)
+        log.info("  %s: %s", adres, type(e).__name__)
         return None
 
 
@@ -192,8 +193,8 @@ def _kanal(no: int, kayit: dict, adres: str, logo: Optional[str], durum: str) ->
 def kanallari_dogrula(kanallar: list[dict]) -> None:
     adlar = set()
     for i, k in enumerate(kanallar, 1):
-        if not k.get("ad"):
-            raise ValueError(f"{i}. kayıtta 'ad' yok")
+        if not isinstance(k.get("ad"), str) or not k["ad"]:
+            raise ValueError(f"{i}. kayıtta 'ad' metin değil (sayıysa tırnak içine alın)")
         if ("iptv_org" in k) == ("adres" in k):
             raise ValueError(f"{k['ad']}: 'iptv_org' ve 'adres' alanlarından tam olarak biri olmalı")
         if k["ad"] in adlar:
@@ -246,8 +247,19 @@ def iptv_org_indir(indir: Indirici) -> dict[str, list[Aday]]:
     raise RuntimeError("iptv-org listesi indirilemedi")
 
 
+class _Toplayici(logging.Handler):
+    def __init__(self):
+        super().__init__()
+        self.satirlar: list[str] = []
+
+    def emit(self, kayit):
+        self.satirlar.append(self.format(kayit))
+
+
 def main() -> int:
     logging.basicConfig(level=logging.INFO, format="%(message)s")
+    toplayici = _Toplayici()
+    logging.getLogger().addHandler(toplayici)
     kanallar = yaml.safe_load(KANALLAR_YAML.read_text(encoding="utf-8"))
     indir = http_indirici()
     eski = json.loads(LISTE_JSON.read_text(encoding="utf-8")) if LISTE_JSON.exists() else None
@@ -262,6 +274,7 @@ def main() -> int:
         log.error("Hiç kanal yok, liste.json yazılmadı")
         return 1
     log.info("liste.json %s", "güncellendi" if kaydet(LISTE_JSON, liste) else "değişmedi")
+    RAPOR.write_text(f"Üretildi: {uretildi}\n\n" + "\n".join(toplayici.satirlar) + "\n", encoding="utf-8")
     return 0
 
 
