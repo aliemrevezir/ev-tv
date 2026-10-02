@@ -1,20 +1,19 @@
-Üretildi: 2026-10-02T18:48:49Z
+Üretildi: 2026-10-02T18:57:57Z
 
 iptv-org listesi: https://iptv-org.github.io/iptv/countries/tr.m3u
 iptv-org listesi: https://raw.githubusercontent.com/iptv-org/iptv/master/streams/tr.m3u
 1. TRT 1
   ok: https://tv-trt1.medya.trt.com.tr/master_720.m3u8
 2. ATV
-  https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/atv/atv_1080p.m3u8: ReadTimeout
-  ok: http://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/atv/atv_360p.m3u8
+  ok: https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/atv/atv_1080p.m3u8
 3. Kanal D
-  ok: https://demiroren.daioncdn.net/kanald/kanald_720p.m3u8?&sid=8sute1loihcl&app=da2109ea-5dfe-4107-89ab-23593336ed61&ce=3
+  ok: https://demiroren.daioncdn.net/kanald/kanald_720p.m3u8?&sid=8suu6nur7jlm&app=da2109ea-5dfe-4107-89ab-23593336ed61&ce=3
 4. Star TV
   ok: https://dogus.daioncdn.net/startv/startv_720p.m3u8?app=a20ac41e-bdc3-4aa1-934d-26b484480ac9&ce=3&sid=8l4w3lst4co5
 5. NOW
-  ok: https://uycyyuuzyh.turknet.ercdn.net/nphindgytw/nowtv/nowtv_720p.m3u8
+  https://uycyyuuzyh.turknet.ercdn.net/nphindgytw/nowtv/nowtv_720p.m3u8: ReadTimeout
 6. TV8
-  ok: https://tv8.daioncdn.net/tv8/tv8_720p.m3u8?&sid=8sutecwmlybj&app=7ddc255a-ef47-4e81-ab14-c0e5f2949788&ce=3
+  ok: https://tv8.daioncdn.net/tv8/tv8_720p.m3u8?&sid=8suu7ecbh3uu&app=7ddc255a-ef47-4e81-ab14-c0e5f2949788&ce=3
 7. Kanal 7
   https://kanal7.blutv.com/blutv_kanal7_live/live.m3u8: SSLError
   ok: https://kanal7-live.daioncdn.net/kanal7/kanal7_720p.m3u8
@@ -36,7 +35,7 @@ Beyaz TV: çalışan adres yok, listeye alınmadı
 15. A Haber
   ok: https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/ahaber/ahaber_720p.m3u8
 16. NTV
-  ok: https://dogus.daioncdn.net/ntv/ntv_720p.m3u8?&sid=8suteng9no38&app=c68bddbe-3dbf-49f7-892a-93de5ae37f1f&ce=2
+  ok: https://dogus.daioncdn.net/ntv/ntv_720p.m3u8?&sid=8suu7pu3ql1j&app=c68bddbe-3dbf-49f7-892a-93de5ae37f1f&ce=2
 17. Halk TV
   ok: https://halktv-live.daioncdn.net/halktv/halktv_720p.m3u8
 18. TGRT Haber
@@ -48,5 +47,5 @@ TVNET: çalışan adres yok, listeye alınmadı
   ok: https://turkmedya-live.ercdn.net/tv24/tv24_1080p.m3u8
 21. Bloomberg HT
   dogrulanamadi: https://ciner-live.daioncdn.net/bloomberght/bloomberght.m3u8
-Toplam 19/21 kanal: {'ok': 15, 'dogrulanamadi': 4}
+Toplam 19/21 kanal: {'ok': 14, 'eski': 1, 'dogrulanamadi': 4}
 liste.json güncellendi
