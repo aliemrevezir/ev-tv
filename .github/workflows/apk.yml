@@ -16,9 +16,9 @@ jobs:
       run:
         working-directory: app
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: "17"
@@ -42,7 +42,15 @@ jobs:
       - name: APK derle
         env:
           EVTV_IMZA_SIFRESI: ${{ secrets.EVTV_IMZA_SIFRESI }}
-        run: ./gradlew :tv:assembleRelease
+        run: |
+          set +e
+          ./gradlew :tv:assembleRelease 2>&1 | tee "$RUNNER_TEMP/derleme.log"
+          durum=${PIPESTATUS[0]}
+          if [ "$durum" -ne 0 ]; then
+            ozet=$(grep -E '^e: |^w: .*error|What went wrong|^> |^  > |error:|ERROR' "$RUNNER_TEMP/derleme.log" | head -40 | sed ':a;N;$!ba;s/%/%25/g;s/\n/%0A/g')
+            echo "::error title=Derleme hatası::$ozet"
+          fi
+          exit "$durum"
 
       - uses: actions/upload-artifact@v4
         with:
