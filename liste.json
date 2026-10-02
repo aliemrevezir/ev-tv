@@ -1,0 +1,111 @@
+{
+  "surum": 1,
+  "uretildi": "2026-10-02T18:44:31Z",
+  "kanallar": [
+    {
+      "no": 1,
+      "ad": "TRT 1",
+      "adres": "https://tv-trt1.medya.trt.com.tr/master_720.m3u8",
+      "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/TRT_1_logo_%282021-%29.svg/960px-TRT_1_logo_%282021-%29.svg.png",
+      "durum": "ok"
+    },
+    {
+      "no": 3,
+      "ad": "Kanal D",
+      "adres": "https://demiroren.daioncdn.net/kanald/kanald_720p.m3u8?&sid=8suszte8juu7&app=da2109ea-5dfe-4107-89ab-23593336ed61&ce=3",
+      "logo": "https://i.imgur.com/9o1atM6.png",
+      "durum": "ok"
+    },
+    {
+      "no": 4,
+      "ad": "Star TV",
+      "adres": "https://dogus.daioncdn.net/startv/startv_720p.m3u8?app=a20ac41e-bdc3-4aa1-934d-26b484480ac9&ce=3&sid=8l4w3lst4co5",
+      "logo": "https://i.imgur.com/9O3DHRB.png",
+      "durum": "ok"
+    },
+    {
+      "no": 6,
+      "ad": "TV8",
+      "adres": "https://tv8.daioncdn.net/tv8/tv8_720p.m3u8?&sid=8sut0ixh471g&app=7ddc255a-ef47-4e81-ab14-c0e5f2949788&ce=3",
+      "logo": "https://upload.wikimedia.org/wikipedia/tr/thumb/6/68/Tv8_Yeni_Logo.png/960px-Tv8_Yeni_Logo.png",
+      "durum": "ok"
+    },
+    {
+      "no": 9,
+      "ad": 360,
+      "adres": "https://turkmedya-live.ercdn.net/tv360/tv360_1080p.m3u8",
+      "logo": "https://i.imgur.com/agn47sQ.png",
+      "durum": "ok"
+    },
+    {
+      "no": 10,
+      "ad": "TRT 2",
+      "adres": "https://tv-trt2.medya.trt.com.tr/master.m3u8",
+      "logo": "https://i.imgur.com/iOCQdyD.png",
+      "durum": "dogrulanamadi"
+    },
+    {
+      "no": 12,
+      "ad": "TRT Çocuk",
+      "adres": "https://tv-trtcocuk.medya.trt.com.tr/master.m3u8",
+      "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/TRT_%C3%87ocuk_logo_%282021%29.svg/960px-TRT_%C3%87ocuk_logo_%282021%29.svg.png",
+      "durum": "dogrulanamadi"
+    },
+    {
+      "no": 13,
+      "ad": "TRT Müzik",
+      "adres": "https://tv-trtmuzik.medya.trt.com.tr/master_720.m3u8",
+      "logo": "https://i.imgur.com/JgUzRH8.png",
+      "durum": "ok"
+    },
+    {
+      "no": 14,
+      "ad": "TRT Haber",
+      "adres": "https://tv-trthaber.medya.trt.com.tr/master_720.m3u8",
+      "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/TRT_Haber_Eyl%C3%BCl_2020_Logo.svg/960px-TRT_Haber_Eyl%C3%BCl_2020_Logo.svg.png",
+      "durum": "ok"
+    },
+    {
+      "no": 15,
+      "ad": "A Haber",
+      "adres": "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/ahaber/ahaber_720p.m3u8",
+      "logo": "https://upload.wikimedia.org/wikipedia/commons/7/7c/Ahaber_Logo.png",
+      "durum": "ok"
+    },
+    {
+      "no": 16,
+      "ad": "NTV",
+      "adres": "https://dogus.daioncdn.net/ntv/ntv_720p.m3u8?&sid=8sut0sr2nqz7&app=c68bddbe-3dbf-49f7-892a-93de5ae37f1f&ce=2",
+      "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/NTV_%28Turkey%29_logo.svg/960px-NTV_%28Turkey%29_logo.svg.png",
+      "durum": "ok"
+    },
+    {
+      "no": 17,
+      "ad": "Halk TV",
+      "adres": "https://halktv-live.daioncdn.net/halktv/halktv_720p.m3u8",
+      "logo": "https://i.imgur.com/xM0HA30.png",
+      "durum": "ok"
+    },
+    {
+      "no": 18,
+      "ad": "TGRT Haber",
+      "adres": "https://canli.tgrthaber.com/tgrt.m3u8",
+      "logo": "https://i.imgur.com/PrxwKDw.png",
+      "durum": "ok"
+    },
+    {
+      "no": 20,
+      "ad": "24 TV",
+      "adres": "https://turkmedya-live.ercdn.net/tv24/tv24_1080p.m3u8",
+      "logo": "https://i.imgur.com/8FO41es.png",
+      "durum": "ok"
+    },
+    {
+      "no": 21,
+      "ad": "Bloomberg HT",
+      "adres": "https://ciner-live.daioncdn.net/bloomberght/bloomberght.m3u8",
+      "logo": "https://i.imgur.com/bmkXfIE.png",
+      "durum": "dogrulanamadi"
+    }
+  ]
+}
