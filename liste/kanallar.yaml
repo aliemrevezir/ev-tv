@@ -1,0 +1,62 @@
+# Kanal seçkisi. Sıra = uygulamadaki kanal numarası (ilk kanal = 1).
+# Her kayıtta 'iptv_org' (tvg-id, @SD eki yazılmaz) ya da 'adres' alanından
+# tam olarak biri bulunur. İsteğe bağlı:
+#   adres_filtresi: iptv-org adayları arasından yalnızca adresinde bu metin
+#                   geçenleri dener (resmi yayıncı sunucusunu seçmek için)
+#   logo:           iptv-org'daki logonun yerine kullanılır
+# Kaynak: https://github.com/iptv-org/iptv/blob/master/streams/tr.m3u
+
+- ad: TRT 1
+  iptv_org: TRT1.tr
+  adres_filtresi: trt.com.tr
+- ad: ATV
+  iptv_org: ATV.tr
+  adres_filtresi: ercdn.net
+- ad: Kanal D
+  iptv_org: KanalD.tr
+- ad: Star TV
+  iptv_org: StarTV.tr
+- ad: NOW
+  iptv_org: NOWTV.tr
+  adres_filtresi: ercdn.net
+- ad: TV8
+  iptv_org: TV8.tr
+  adres_filtresi: daioncdn.net
+- ad: Kanal 7
+  iptv_org: Kanal7.tr
+- ad: Beyaz TV
+  iptv_org: BeyazTV.tr
+- ad: 360
+  iptv_org: 360.tr
+- ad: TRT 2
+  iptv_org: TRT2.tr
+  adres_filtresi: trt.com.tr
+- ad: TRT Belgesel
+  iptv_org: TRTBelgesel.tr
+  adres_filtresi: trt.com.tr
+- ad: TRT Çocuk
+  iptv_org: TRTCocuk.tr
+  adres_filtresi: trt.com.tr
+- ad: TRT Müzik
+  iptv_org: TRTMuzik.tr
+  adres_filtresi: trt.com.tr
+- ad: TRT Haber
+  iptv_org: TRTHaber.tr
+  adres_filtresi: trt.com.tr
+- ad: A Haber
+  iptv_org: AHaber.tr
+- ad: NTV
+  iptv_org: NTV.tr
+- ad: Halk TV
+  iptv_org: HalkTV.tr
+- ad: TGRT Haber
+  iptv_org: TGRTHaber.tr
+  adres_filtresi: tgrthaber.com
+- ad: TVNET
+  iptv_org: TVNET.tr
+- ad: 24 TV
+  iptv_org: 24TV.tr
+  adres_filtresi: turkmedya
+- ad: Bloomberg HT
+  iptv_org: BloombergHT.tr
+  adres_filtresi: daioncdn.net

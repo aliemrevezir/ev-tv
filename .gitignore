@@ -1,0 +1,7 @@
+__pycache__/
+.pytest_cache/
+.gradle/
+build/
+local.properties
+.idea/
+*.iml
