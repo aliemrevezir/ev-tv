@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!-- launchd ~/Documents'ı okuyamıyor (macOS gizlilik koruması); betik kopyalanır.
+     Kurulum: mkdir -p ~/Library/Application\ Support/EvTV &&
+     cp mac/sicaklik_yayini.py ~/Library/Application\ Support/EvTV/ &&
+     cp mac/com.aliemrevezir.evtv.sicaklik.plist ~/Library/LaunchAgents/ &&
+     launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.aliemrevezir.evtv.sicaklik.plist
+     Kaldırma: launchctl bootout gui/$(id -u)/com.aliemrevezir.evtv.sicaklik -->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.aliemrevezir.evtv.sicaklik</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/usr/bin/python3</string>
+        <string>/Users/aliemrevezir/Library/Application Support/EvTV/sicaklik_yayini.py</string>
+    </array>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <true/>
+    <key>ThrottleInterval</key>
+    <integer>30</integer>
+    <key>StandardErrorPath</key>
+    <string>/tmp/evtv-sicaklik.log</string>
+</dict>
+</plist>

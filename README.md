@@ -72,3 +72,13 @@ adb logcat -s EvTV                           # "Kare sayısı", "Donma", "İkinc
 
 `Kare sayısı` 30 sn'de bir yazılır; oynarken artmıyorsa donma bekçisi bu
 cihazda kare sayısını okuyamıyor demektir (bildir).
+
+## Sıcaklık göstergesi
+
+Ev TV, ev ağında `_evtvsicaklik._tcp` adıyla duyurulan bir yayını mDNS ile
+bulur, dakikada bir `GET /` ile `{"sicaklik": 30.4, "kaynak": "..."}` okur ve
+sağ üst köşede gösterir; yayın yoksa gösterge gizlenir. Şimdilik kaynak Mac'in
+batarya sıcaklığı (`mac/sicaklik_yayini.py`, oda sıcaklığının birkaç derece
+üstü). Mac açılınca otomatik başlatmak için `mac/com.aliemrevezir.evtv.sicaklik.plist`
+içindeki kurulum adımları. İleride ESP32 + DHT22 aynı adla ve aynı JSON'la
+yayın yapınca uygulamada değişiklik gerekmez.

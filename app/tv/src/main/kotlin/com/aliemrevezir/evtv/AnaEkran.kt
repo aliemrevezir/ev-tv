@@ -48,6 +48,8 @@ class AnaEkran : Activity(), Oynatici.Dinleyici {
     private lateinit var kanalAdi: TextView
     private lateinit var mesaj: TextView
     private lateinit var cikisUyarisi: TextView
+    private lateinit var sicaklik: TextView
+    private lateinit var sicaklikIzleyici: SicaklikIzleyici
     private lateinit var panel: View
     private lateinit var listeGorunumu: ListView
     private lateinit var listeUyarlayici: KanalUyarlayici
@@ -78,6 +80,11 @@ class AnaEkran : Activity(), Oynatici.Dinleyici {
         kanalAdi = findViewById(R.id.kanal_adi)
         mesaj = findViewById(R.id.mesaj)
         cikisUyarisi = findViewById(R.id.cikis_uyarisi)
+        sicaklik = findViewById(R.id.sicaklik)
+        sicaklikIzleyici = SicaklikIzleyici(this) { okuma ->
+            sicaklik.text = okuma?.metin()
+            sicaklik.visibility = if (okuma == null) View.GONE else View.VISIBLE
+        }
         panel = findViewById(R.id.panel)
         listeGorunumu = findViewById(R.id.kanal_listesi)
 
@@ -103,6 +110,7 @@ class AnaEkran : Activity(), Oynatici.Dinleyici {
         super.onStart()
         calisiyor = true
         anaIs.post(tik)
+        sicaklikIzleyici.basla()
         if (secici != null) {
             oynat(yeniKanal = true)
             listeyiTazele()
@@ -121,6 +129,7 @@ class AnaEkran : Activity(), Oynatici.Dinleyici {
     override fun onStop() {
         calisiyor = false
         anaIs.removeCallbacksAndMessages(null)
+        sicaklikIzleyici.durdur()
         acilisBekcisi.durdu()
         oynatici.durdur()
         super.onStop()
