@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.ComponentName
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.provider.Settings
 import android.os.Handler
@@ -46,6 +47,7 @@ class AnaEkran : Activity(), Oynatici.Dinleyici {
     private lateinit var logo: ImageView
     private lateinit var kanalAdi: TextView
     private lateinit var mesaj: TextView
+    private lateinit var cikisUyarisi: TextView
     private lateinit var panel: View
     private lateinit var listeGorunumu: ListView
     private lateinit var listeUyarlayici: KanalUyarlayici
@@ -54,8 +56,10 @@ class AnaEkran : Activity(), Oynatici.Dinleyici {
 
     private var calisiyor = false
     private var sonGunluk = 0L
+    private var sonGeriBasis = 0L
 
     private val kanalBilgisiniGizle = Runnable { kanalBilgisi.visibility = View.GONE }
+    private val cikisUyarisiniGizle = Runnable { cikisUyarisi.visibility = View.GONE }
     private val listeyiYenidenDene = Runnable { listeyiTazele() }
     private val tik = object : Runnable {
         override fun run() {
@@ -73,6 +77,7 @@ class AnaEkran : Activity(), Oynatici.Dinleyici {
         logo = findViewById(R.id.logo)
         kanalAdi = findViewById(R.id.kanal_adi)
         mesaj = findViewById(R.id.mesaj)
+        cikisUyarisi = findViewById(R.id.cikis_uyarisi)
         panel = findViewById(R.id.panel)
         listeGorunumu = findViewById(R.id.kanal_listesi)
 
@@ -244,8 +249,7 @@ class AnaEkran : Activity(), Oynatici.Dinleyici {
             KeyEvent.KEYCODE_DPAD_DOWN, KeyEvent.KEYCODE_CHANNEL_DOWN -> kanalDegistir { it.onceki() }
             KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER,
             KeyEvent.KEYCODE_NUMPAD_ENTER, KeyEvent.KEYCODE_MENU -> panelAc()
-            // Ev TV ana ekran: Geri ile çıkılırsa boş ekran kalır, yutulur.
-            KeyEvent.KEYCODE_BACK -> Unit
+            KeyEvent.KEYCODE_BACK -> geriBasildi()
             else -> return super.onKeyDown(keyCode, event)
         }
         return true
@@ -270,6 +274,27 @@ class AnaEkran : Activity(), Oynatici.Dinleyici {
             Log.w(ETIKET, "Eski ana ekran yok, ayarlar açılıyor: $e")
             startActivity(Intent(Settings.ACTION_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
         }
+    }
+
+    // Varsayılan ana ekransak Geri yutulur: çıkılırsa boş ekran kalır. Değilsek
+    // panel kapalıyken iki kez Geri çıkar.
+    private fun geriBasildi() {
+        if (varsayilanAnaEkran()) return
+        val simdi = SystemClock.elapsedRealtime()
+        if (simdi - sonGeriBasis < CIKIS_SURESI_MS) {
+            finish()
+            return
+        }
+        sonGeriBasis = simdi
+        cikisUyarisi.visibility = View.VISIBLE
+        anaIs.removeCallbacks(cikisUyarisiniGizle)
+        anaIs.postDelayed(cikisUyarisiniGizle, CIKIS_SURESI_MS)
+    }
+
+    private fun varsayilanAnaEkran(): Boolean {
+        val niyet = Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_HOME)
+        val ana = packageManager.resolveActivity(niyet, PackageManager.MATCH_DEFAULT_ONLY)
+        return ana?.activityInfo?.packageName == packageName
     }
 
     private fun kanalDegistir(adim: (KanalSecici) -> Kanal) {
@@ -330,6 +355,7 @@ class AnaEkran : Activity(), Oynatici.Dinleyici {
         const val LISTE_ADRESI = "https://raw.githubusercontent.com/aliemrevezir/ev-tv/main/liste.json"
         const val YENIDEN_DENEME_MS = 10_000L
         const val KANAL_BILGISI_MS = 3_000L
+        const val CIKIS_SURESI_MS = 3_000L
         const val ESKI_ANA_EKRAN_PAKETI = "com.google.android.tvlauncher"
         const val ESKI_ANA_EKRAN_ETKINLIGI = "com.google.android.tvlauncher.MainActivity"
         const val GUNLUK_ARALIGI_MS = 30_000L
