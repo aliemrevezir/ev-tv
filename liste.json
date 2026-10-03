@@ -1,160 +1,182 @@
 {
   "surum": 1,
-  "uretildi": "2026-10-03T16:57:28Z",
+  "uretildi": "2026-10-03T17:24:27Z",
   "kanallar": [
     {
       "no": 1,
       "ad": "TRT 1",
       "adres": "https://tv-trt1.medya.trt.com.tr/master_720.m3u8",
       "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/TRT_1_logo_%282021-%29.svg/960px-TRT_1_logo_%282021-%29.svg.png",
-      "durum": "ok"
+      "durum": "ok",
+      "grup": "Ulusal"
     },
     {
       "no": 2,
       "ad": "ATV",
-      "adres": "http://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/atv/atv_360p.m3u8",
+      "adres": "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/atv/atv_1080p.m3u8",
       "logo": "https://i.imgur.com/HyVUwFC.png",
-      "durum": "ok"
+      "durum": "ok",
+      "grup": "Ulusal"
     },
     {
       "no": 3,
       "ad": "Kanal D",
-      "adres": "https://demiroren.daioncdn.net/kanald/kanald_720p.m3u8?&sid=8sy3wibmnoaa&app=da2109ea-5dfe-4107-89ab-23593336ed61&ce=3",
+      "adres": "https://demiroren.daioncdn.net/kanald/kanald_720p.m3u8?&sid=8sy6amo13539&app=da2109ea-5dfe-4107-89ab-23593336ed61&ce=3",
       "logo": "https://i.imgur.com/9o1atM6.png",
-      "durum": "ok"
+      "durum": "ok",
+      "grup": "Ulusal"
     },
     {
       "no": 4,
       "ad": "Star TV",
       "adres": "https://dogus.daioncdn.net/startv/startv_720p.m3u8?app=a20ac41e-bdc3-4aa1-934d-26b484480ac9&ce=3&sid=8l4w3lst4co5",
       "logo": "https://i.imgur.com/9O3DHRB.png",
-      "durum": "ok"
+      "durum": "ok",
+      "grup": "Ulusal"
     },
     {
       "no": 5,
       "ad": "NOW",
       "adres": "https://uycyyuuzyh.turknet.ercdn.net/nphindgytw/nowtv/nowtv_720p.m3u8",
       "logo": "https://i.imgur.com/5EYjWK7.png",
-      "durum": "eski"
+      "durum": "eski",
+      "grup": "Ulusal"
     },
     {
       "no": 6,
       "ad": "TV8",
-      "adres": "https://tv8.daioncdn.net/tv8/tv8_720p.m3u8?&sid=8sy3x6n113n0&app=7ddc255a-ef47-4e81-ab14-c0e5f2949788&ce=3",
+      "adres": "https://tv8.daioncdn.net/tv8/tv8_720p.m3u8?&sid=8sy6ba77o34d&app=7ddc255a-ef47-4e81-ab14-c0e5f2949788&ce=3",
       "logo": "https://upload.wikimedia.org/wikipedia/tr/thumb/6/68/Tv8_Yeni_Logo.png/960px-Tv8_Yeni_Logo.png",
-      "durum": "ok"
+      "durum": "ok",
+      "grup": "Ulusal"
     },
     {
       "no": 7,
       "ad": "Kanal 7",
       "adres": "https://kanal7-live.daioncdn.net/kanal7/kanal7_720p.m3u8",
       "logo": "https://i.imgur.com/0gq9xOm.png",
-      "durum": "ok"
+      "durum": "ok",
+      "grup": "Ulusal"
     },
     {
       "no": 9,
       "ad": "360",
       "adres": "https://turkmedya-live.ercdn.net/tv360/tv360_1080p.m3u8",
       "logo": "https://i.imgur.com/agn47sQ.png",
-      "durum": "ok"
+      "durum": "ok",
+      "grup": "Ulusal"
     },
     {
       "no": 10,
-      "ad": "TRT 2",
-      "adres": "https://tv-trt2.medya.trt.com.tr/master_720.m3u8",
-      "logo": "https://i.imgur.com/iOCQdyD.png",
-      "durum": "dogrulanamadi"
-    },
-    {
-      "no": 11,
-      "ad": "TRT Belgesel",
-      "adres": "https://tv-trtbelgesel.medya.trt.com.tr/master_720.m3u8",
-      "logo": null,
-      "durum": "dogrulanamadi"
-    },
-    {
-      "no": 12,
-      "ad": "TRT Çocuk",
-      "adres": "https://tv-trtcocuk.medya.trt.com.tr/master_720.m3u8",
-      "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/TRT_%C3%87ocuk_logo_%282021%29.svg/960px-TRT_%C3%87ocuk_logo_%282021%29.svg.png",
-      "durum": "ok"
-    },
-    {
-      "no": 13,
-      "ad": "TRT Müzik",
-      "adres": "https://tv-trtmuzik.medya.trt.com.tr/master_720.m3u8",
-      "logo": "https://i.imgur.com/JgUzRH8.png",
-      "durum": "ok"
-    },
-    {
-      "no": 14,
       "ad": "TRT Haber",
       "adres": "https://tv-trthaber.medya.trt.com.tr/master_720.m3u8",
       "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/TRT_Haber_Eyl%C3%BCl_2020_Logo.svg/960px-TRT_Haber_Eyl%C3%BCl_2020_Logo.svg.png",
-      "durum": "ok"
+      "durum": "ok",
+      "grup": "Haber"
     },
     {
-      "no": 15,
+      "no": 11,
       "ad": "A Haber",
       "adres": "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/ahaber/ahaber_720p.m3u8",
       "logo": "https://upload.wikimedia.org/wikipedia/commons/7/7c/Ahaber_Logo.png",
-      "durum": "ok"
+      "durum": "ok",
+      "grup": "Haber"
     },
     {
-      "no": 16,
+      "no": 12,
       "ad": "NTV",
-      "adres": "https://dogus.daioncdn.net/ntv/ntv_720p.m3u8?&sid=8sy3xiwc5sva&app=c68bddbe-3dbf-49f7-892a-93de5ae37f1f&ce=2",
+      "adres": "https://dogus.daioncdn.net/ntv/ntv_720p.m3u8?&sid=8sy6bgvmaj7t&app=c68bddbe-3dbf-49f7-892a-93de5ae37f1f&ce=2",
       "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/NTV_%28Turkey%29_logo.svg/960px-NTV_%28Turkey%29_logo.svg.png",
-      "durum": "ok"
+      "durum": "ok",
+      "grup": "Haber"
     },
     {
-      "no": 17,
-      "ad": "Halk TV",
-      "adres": "https://halktv-live.daioncdn.net/halktv/halktv_720p.m3u8",
-      "logo": "https://i.imgur.com/xM0HA30.png",
-      "durum": "ok"
-    },
-    {
-      "no": 18,
-      "ad": "TGRT Haber",
-      "adres": "https://canli.tgrthaber.com/tgrt.m3u8",
-      "logo": "https://i.imgur.com/PrxwKDw.png",
-      "durum": "ok"
-    },
-    {
-      "no": 20,
-      "ad": "24 TV",
-      "adres": "https://turkmedya-live.ercdn.net/tv24/tv24_1080p.m3u8",
-      "logo": "https://i.imgur.com/8FO41es.png",
-      "durum": "ok"
-    },
-    {
-      "no": 21,
-      "ad": "Bloomberg HT",
-      "adres": "https://ciner.daioncdn.net/bloomberght/bloomberght_720p.m3u8",
-      "logo": "https://i.imgur.com/bmkXfIE.png",
-      "durum": "ok"
-    },
-    {
-      "no": 22,
+      "no": 13,
       "ad": "CNN Türk",
       "adres": "https://live.duhnet.tv/S2/HLS_LIVE/cnnturknp/playlist.m3u8",
       "logo": "https://static.cnnturk.com/images/cnnturk-logo.png",
-      "durum": "dogrulanamadi"
+      "durum": "dogrulanamadi",
+      "grup": "Haber"
     },
     {
-      "no": 23,
+      "no": 14,
       "ad": "Habertürk",
       "adres": "https://ciner.daioncdn.net/haberturktv/haberturktv_720p.m3u8?app=c98ab0b0-50cc-495b-bb37-778e91f5ff5b&ce=3",
       "logo": "https://i.imgur.com/6Tw3rUp.png",
-      "durum": "ok"
+      "durum": "ok",
+      "grup": "Haber"
     },
     {
-      "no": 24,
+      "no": 15,
+      "ad": "Halk TV",
+      "adres": "https://halktv-live.daioncdn.net/halktv/halktv_720p.m3u8",
+      "logo": "https://i.imgur.com/xM0HA30.png",
+      "durum": "ok",
+      "grup": "Haber"
+    },
+    {
+      "no": 16,
+      "ad": "TGRT Haber",
+      "adres": "https://canli.tgrthaber.com/tgrt.m3u8",
+      "logo": "https://i.imgur.com/PrxwKDw.png",
+      "durum": "ok",
+      "grup": "Haber"
+    },
+    {
+      "no": 18,
+      "ad": "24 TV",
+      "adres": "https://turkmedya-live.ercdn.net/tv24/tv24_1080p.m3u8",
+      "logo": "https://i.imgur.com/8FO41es.png",
+      "durum": "ok",
+      "grup": "Haber"
+    },
+    {
+      "no": 19,
       "ad": "Bengütürk",
       "adres": "https://tv.ensonhaber.com/benguturk/benguturk_720p.m3u8",
       "logo": null,
-      "durum": "ok"
+      "durum": "ok",
+      "grup": "Haber"
+    },
+    {
+      "no": 20,
+      "ad": "Bloomberg HT",
+      "adres": "https://ciner.daioncdn.net/bloomberght/bloomberght_720p.m3u8",
+      "logo": "https://i.imgur.com/bmkXfIE.png",
+      "durum": "ok",
+      "grup": "Haber"
+    },
+    {
+      "no": 21,
+      "ad": "TRT 2",
+      "adres": "https://tv-trt2.medya.trt.com.tr/master_720.m3u8",
+      "logo": "https://i.imgur.com/iOCQdyD.png",
+      "durum": "dogrulanamadi",
+      "grup": "Tematik"
+    },
+    {
+      "no": 22,
+      "ad": "TRT Belgesel",
+      "adres": "https://tv-trtbelgesel.medya.trt.com.tr/master_720.m3u8",
+      "logo": null,
+      "durum": "dogrulanamadi",
+      "grup": "Tematik"
+    },
+    {
+      "no": 23,
+      "ad": "TRT Çocuk",
+      "adres": "https://tv-trtcocuk.medya.trt.com.tr/master_720.m3u8",
+      "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/TRT_%C3%87ocuk_logo_%282021%29.svg/960px-TRT_%C3%87ocuk_logo_%282021%29.svg.png",
+      "durum": "ok",
+      "grup": "Tematik"
+    },
+    {
+      "no": 24,
+      "ad": "TRT Müzik",
+      "adres": "https://tv-trtmuzik.medya.trt.com.tr/master_720.m3u8",
+      "logo": "https://i.imgur.com/JgUzRH8.png",
+      "durum": "ok",
+      "grup": "Tematik"
     }
   ]
 }

@@ -1,20 +1,19 @@
-Üretildi: 2026-10-03T16:57:28Z
+Üretildi: 2026-10-03T17:24:27Z
 
 iptv-org listesi: https://iptv-org.github.io/iptv/countries/tr.m3u
 iptv-org listesi: https://raw.githubusercontent.com/iptv-org/iptv/master/streams/tr.m3u
 1. TRT 1
   ok: https://tv-trt1.medya.trt.com.tr/master_720.m3u8
 2. ATV
-  https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/atv/atv_1080p.m3u8: ReadTimeout
-  ok: http://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/atv/atv_360p.m3u8
+  ok: https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/atv/atv_1080p.m3u8
 3. Kanal D
-  ok: https://demiroren.daioncdn.net/kanald/kanald_720p.m3u8?&sid=8sy3wibmnoaa&app=da2109ea-5dfe-4107-89ab-23593336ed61&ce=3
+  ok: https://demiroren.daioncdn.net/kanald/kanald_720p.m3u8?&sid=8sy6amo13539&app=da2109ea-5dfe-4107-89ab-23593336ed61&ce=3
 4. Star TV
   ok: https://dogus.daioncdn.net/startv/startv_720p.m3u8?app=a20ac41e-bdc3-4aa1-934d-26b484480ac9&ce=3&sid=8l4w3lst4co5
 5. NOW
   https://uycyyuuzyh.turknet.ercdn.net/nphindgytw/nowtv/nowtv_720p.m3u8: ReadTimeout
 6. TV8
-  ok: https://tv8.daioncdn.net/tv8/tv8_720p.m3u8?&sid=8sy3x6n113n0&app=7ddc255a-ef47-4e81-ab14-c0e5f2949788&ce=3
+  ok: https://tv8.daioncdn.net/tv8/tv8_720p.m3u8?&sid=8sy6ba77o34d&app=7ddc255a-ef47-4e81-ab14-c0e5f2949788&ce=3
 7. Kanal 7
   https://kanal7.blutv.com/blutv_kanal7_live/live.m3u8: SSLError
   ok: https://kanal7-live.daioncdn.net/kanal7/kanal7_720p.m3u8
@@ -23,36 +22,36 @@ iptv-org listesi: https://raw.githubusercontent.com/iptv-org/iptv/master/streams
 Beyaz TV: çalışan adres yok, listeye alınmadı
 9. 360
   ok: https://turkmedya-live.ercdn.net/tv360/tv360_1080p.m3u8
-10. TRT 2
-  dogrulanamadi: https://tv-trt2.medya.trt.com.tr/master_720.m3u8
-11. TRT Belgesel
-  dogrulanamadi: https://tv-trtbelgesel.medya.trt.com.tr/master_720.m3u8
-12. TRT Çocuk
-  ok: https://tv-trtcocuk.medya.trt.com.tr/master_720.m3u8
-13. TRT Müzik
-  ok: https://tv-trtmuzik.medya.trt.com.tr/master_720.m3u8
-14. TRT Haber
+10. TRT Haber
   ok: https://tv-trthaber.medya.trt.com.tr/master_720.m3u8
-15. A Haber
+11. A Haber
   ok: https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/ahaber/ahaber_720p.m3u8
-16. NTV
-  ok: https://dogus.daioncdn.net/ntv/ntv_720p.m3u8?&sid=8sy3xiwc5sva&app=c68bddbe-3dbf-49f7-892a-93de5ae37f1f&ce=2
-17. Halk TV
+12. NTV
+  ok: https://dogus.daioncdn.net/ntv/ntv_720p.m3u8?&sid=8sy6bgvmaj7t&app=c68bddbe-3dbf-49f7-892a-93de5ae37f1f&ce=2
+13. CNN Türk
+  dogrulanamadi: https://live.duhnet.tv/S2/HLS_LIVE/cnnturknp/playlist.m3u8
+14. Habertürk
+  ok: https://ciner.daioncdn.net/haberturktv/haberturktv_720p.m3u8?app=c98ab0b0-50cc-495b-bb37-778e91f5ff5b&ce=3
+15. Halk TV
   ok: https://halktv-live.daioncdn.net/halktv/halktv_720p.m3u8
-18. TGRT Haber
+16. TGRT Haber
   ok: https://canli.tgrthaber.com/tgrt.m3u8
-19. TVNET
+17. TVNET
   https://tvnet-live.lg.mncdn.com/tvnet/tvnet/playlist.m3u8: HTTP 404
 TVNET: çalışan adres yok, listeye alınmadı
-20. 24 TV
+18. 24 TV
   ok: https://turkmedya-live.ercdn.net/tv24/tv24_1080p.m3u8
-21. Bloomberg HT
-  ok: https://ciner.daioncdn.net/bloomberght/bloomberght_720p.m3u8
-22. CNN Türk
-  dogrulanamadi: https://live.duhnet.tv/S2/HLS_LIVE/cnnturknp/playlist.m3u8
-23. Habertürk
-  ok: https://ciner.daioncdn.net/haberturktv/haberturktv_720p.m3u8?app=c98ab0b0-50cc-495b-bb37-778e91f5ff5b&ce=3
-24. Bengütürk
+19. Bengütürk
   ok: https://tv.ensonhaber.com/benguturk/benguturk_720p.m3u8
+20. Bloomberg HT
+  ok: https://ciner.daioncdn.net/bloomberght/bloomberght_720p.m3u8
+21. TRT 2
+  dogrulanamadi: https://tv-trt2.medya.trt.com.tr/master_720.m3u8
+22. TRT Belgesel
+  dogrulanamadi: https://tv-trtbelgesel.medya.trt.com.tr/master_720.m3u8
+23. TRT Çocuk
+  ok: https://tv-trtcocuk.medya.trt.com.tr/master_720.m3u8
+24. TRT Müzik
+  ok: https://tv-trtmuzik.medya.trt.com.tr/master_720.m3u8
 Toplam 22/24 kanal: {'ok': 18, 'eski': 1, 'dogrulanamadi': 3}
 liste.json güncellendi
