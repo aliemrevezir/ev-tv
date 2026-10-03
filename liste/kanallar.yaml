@@ -4,78 +4,112 @@
 #   adres_filtresi: iptv-org adayları arasından yalnızca adresinde bu metin
 #                   geçenleri dener (resmi yayıncı sunucusunu seçmek için)
 #   logo:           iptv-org'daki logonun yerine kullanılır
+#   grup:           panelde kanalın altında listelendiği başlık; aynı grubun
+#                   kanalları art arda yazılır
 # Kaynak: https://github.com/iptv-org/iptv/blob/master/streams/tr.m3u
 
+# --- Ulusal ---
+
 - ad: TRT 1
+  grup: Ulusal
   iptv_org: TRT1.tr
   adres_filtresi: trt.com.tr
 - ad: ATV
+  grup: Ulusal
   iptv_org: ATV.tr
   adres_filtresi: ercdn.net
 - ad: Kanal D
+  grup: Ulusal
   iptv_org: KanalD.tr
 - ad: Star TV
+  grup: Ulusal
   iptv_org: StarTV.tr
 - ad: NOW
+  grup: Ulusal
   iptv_org: NOWTV.tr
   adres_filtresi: ercdn.net
 - ad: TV8
+  grup: Ulusal
   iptv_org: TV8.tr
   adres_filtresi: daioncdn.net
 - ad: Kanal 7
+  grup: Ulusal
   iptv_org: Kanal7.tr
 - ad: Beyaz TV
+  grup: Ulusal
   iptv_org: BeyazTV.tr
 - ad: "360"
+  grup: Ulusal
   iptv_org: 360.tr
-- ad: TRT 2
-  # Bölge kısıtlı (ABD'den doğrulanamıyor); diğer TRT kanallarıyla aynı kalıp.
-  adres: https://tv-trt2.medya.trt.com.tr/master_720.m3u8
-  logo: https://i.imgur.com/iOCQdyD.png
-- ad: TRT Belgesel
-  # Bölge kısıtlı (ABD'den doğrulanamıyor); diğer TRT kanallarıyla aynı kalıp.
-  adres: https://tv-trtbelgesel.medya.trt.com.tr/master_720.m3u8
-- ad: TRT Çocuk
-  # Bölge kısıtlı (ABD'den doğrulanamıyor); diğer TRT kanallarıyla aynı kalıp.
-  adres: https://tv-trtcocuk.medya.trt.com.tr/master_720.m3u8
-  logo: https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/TRT_%C3%87ocuk_logo_%282021%29.svg/960px-TRT_%C3%87ocuk_logo_%282021%29.svg.png
-- ad: TRT Müzik
-  iptv_org: TRTMuzik.tr
-  adres_filtresi: trt.com.tr
+
+# --- Haber ---
+
 - ad: TRT Haber
+  grup: Haber
   iptv_org: TRTHaber.tr
   adres_filtresi: trt.com.tr
 - ad: A Haber
+  grup: Haber
   iptv_org: AHaber.tr
 - ad: NTV
+  grup: Haber
   iptv_org: NTV.tr
-- ad: Halk TV
-  iptv_org: HalkTV.tr
-- ad: TGRT Haber
-  iptv_org: TGRTHaber.tr
-  adres_filtresi: tgrthaber.com
-- ad: TVNET
-  iptv_org: TVNET.tr
-- ad: 24 TV
-  iptv_org: 24TV.tr
-  adres_filtresi: turkmedya
-# iptv-org'daki ciner-live.daioncdn.net 403 veriyor; bloomberght.com'un kendi
-# oynatıcısı ciner.daioncdn.net kullanıyor. Ana listedeki alt listeler 3 saatlik
-# token taşıyor (gece üretilen listede bayatlar); token'sız 720p listesi açık.
-- ad: Bloomberg HT
-  adres: https://ciner.daioncdn.net/bloomberght/bloomberght_720p.m3u8
-  logo: https://i.imgur.com/bmkXfIE.png
 # iptv-org'da yok. Adres ~3 saatlik imza istiyor; imzasız taban 403 verir
 # (durum: dogrulanamadi). Uygulamanın vekili açılışta imzalı adresi
 # cnnturk.com API'sinden alır (bkz. CnnTurk.kt).
 - ad: CNN Türk
+  grup: Haber
   adres: https://live.duhnet.tv/S2/HLS_LIVE/cnnturknp/playlist.m3u8
   logo: https://static.cnnturk.com/images/cnnturk-logo.png
 # iptv-org'daki tek aday tv.ensonhaber.com aktarıcısı (Not 24/7); haberturk.com'un
 # kendi oynatıcısı ciner.daioncdn.net kullanıyor. 'app' sabit, token'sız açılıyor.
 - ad: Habertürk
+  grup: Haber
   adres: https://ciner.daioncdn.net/haberturktv/haberturktv_720p.m3u8?app=c98ab0b0-50cc-495b-bb37-778e91f5ff5b&ce=3
   logo: https://i.imgur.com/6Tw3rUp.png
+- ad: Halk TV
+  grup: Haber
+  iptv_org: HalkTV.tr
+- ad: TGRT Haber
+  grup: Haber
+  iptv_org: TGRTHaber.tr
+  adres_filtresi: tgrthaber.com
+- ad: TVNET
+  grup: Haber
+  iptv_org: TVNET.tr
+- ad: 24 TV
+  grup: Haber
+  iptv_org: 24TV.tr
+  adres_filtresi: turkmedya
 - ad: Bengütürk
+  grup: Haber
   iptv_org: BenguturkTV.tr
   adres_filtresi: ensonhaber.com
+# iptv-org'daki ciner-live.daioncdn.net 403 veriyor; bloomberght.com'un kendi
+# oynatıcısı ciner.daioncdn.net kullanıyor. Ana listedeki alt listeler 3 saatlik
+# token taşıyor (gece üretilen listede bayatlar); token'sız 720p listesi açık.
+- ad: Bloomberg HT
+  grup: Haber
+  adres: https://ciner.daioncdn.net/bloomberght/bloomberght_720p.m3u8
+  logo: https://i.imgur.com/bmkXfIE.png
+
+# --- Tematik ---
+
+- ad: TRT 2
+  grup: Tematik
+  # Bölge kısıtlı (ABD'den doğrulanamıyor); diğer TRT kanallarıyla aynı kalıp.
+  adres: https://tv-trt2.medya.trt.com.tr/master_720.m3u8
+  logo: https://i.imgur.com/iOCQdyD.png
+- ad: TRT Belgesel
+  grup: Tematik
+  # Bölge kısıtlı (ABD'den doğrulanamıyor); diğer TRT kanallarıyla aynı kalıp.
+  adres: https://tv-trtbelgesel.medya.trt.com.tr/master_720.m3u8
+- ad: TRT Çocuk
+  grup: Tematik
+  # Bölge kısıtlı (ABD'den doğrulanamıyor); diğer TRT kanallarıyla aynı kalıp.
+  adres: https://tv-trtcocuk.medya.trt.com.tr/master_720.m3u8
+  logo: https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/TRT_%C3%87ocuk_logo_%282021%29.svg/960px-TRT_%C3%87ocuk_logo_%282021%29.svg.png
+- ad: TRT Müzik
+  grup: Tematik
+  iptv_org: TRTMuzik.tr
+  adres_filtresi: trt.com.tr

@@ -250,6 +250,29 @@ def test_kanallari_dogrula_ayni_ad_iki_kez():
         uret.kanallari_dogrula([{"ad": "X", "iptv_org": "X.tr"}, {"ad": "X", "adres": "https://x"}])
 
 
+def test_kanallari_dogrula_dagilmis_grup():
+    with pytest.raises(ValueError):
+        uret.kanallari_dogrula([
+            {"ad": "A", "adres": "https://a", "grup": "Ulusal"},
+            {"ad": "B", "adres": "https://b", "grup": "Haber"},
+            {"ad": "C", "adres": "https://c", "grup": "Ulusal"},
+        ])
+
+
+def test_kanallari_dogrula_art_arda_gruplar_gecer():
+    uret.kanallari_dogrula([
+        {"ad": "A", "adres": "https://a", "grup": "Ulusal"},
+        {"ad": "B", "adres": "https://b", "grup": "Ulusal"},
+        {"ad": "C", "adres": "https://c", "grup": "Haber"},
+    ])
+
+
+def test_kanal_isle_grubu_tasir():
+    indir = sahte_indirici({"https://x/m.m3u8": Yanit(200, MEDIA, "https://x/m.m3u8")})
+    kayit = {"ad": "NTV", "adres": "https://x/m.m3u8", "grup": "Haber"}
+    assert uret.kanal_isle(1, kayit, {}, indir, None)["grup"] == "Haber"
+
+
 # --- liste üretimi ---
 
 def test_liste_uret_dusen_kanal_numaralari_kaydirmaz():

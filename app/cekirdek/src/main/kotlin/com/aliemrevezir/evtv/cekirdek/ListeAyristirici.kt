@@ -13,7 +13,13 @@ object ListeAyristirici {
     private data class Liste(val kanallar: List<KanalJson>)
 
     @Serializable
-    private data class KanalJson(val no: Int, val ad: String, val adres: String, val logo: String? = null)
+    private data class KanalJson(
+        val no: Int,
+        val ad: String,
+        val adres: String,
+        val logo: String? = null,
+        val grup: String? = null,
+    )
 
     private val json = Json { ignoreUnknownKeys = true }
 
@@ -27,7 +33,7 @@ object ListeAyristirici {
         }
         if (liste.kanallar.isEmpty()) throw ListeHatasi("liste.json'da kanal yok")
         return liste.kanallar
-            .map { Kanal(it.no, it.ad, it.adres, it.logo) }
+            .map { Kanal(it.no, it.ad, it.adres, it.logo, it.grup) }
             .sortedBy { it.no }
     }
 }

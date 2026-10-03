@@ -189,8 +189,11 @@ def kanal_isle(no: int, kayit: dict, iptv_org: dict[str, list[Aday]],
 
 
 def _kanal(no: int, kayit: dict, adres: str, logo: Optional[str], durum: str) -> dict:
-    return {"no": no, "ad": kayit["ad"], "adres": adres,
-            "logo": kayit.get("logo") or logo, "durum": durum}
+    kanal = {"no": no, "ad": kayit["ad"], "adres": adres,
+             "logo": kayit.get("logo") or logo, "durum": durum}
+    if "grup" in kayit:
+        kanal["grup"] = kayit["grup"]
+    return kanal
 
 
 def kanallari_dogrula(kanallar: list[dict]) -> None:
@@ -203,6 +206,16 @@ def kanallari_dogrula(kanallar: list[dict]) -> None:
         if k["ad"] in adlar:
             raise ValueError(f"{k['ad']}: aynı ad iki kez kullanılmış")
         adlar.add(k["ad"])
+        if "grup" in k and (not isinstance(k["grup"], str) or not k["grup"]):
+            raise ValueError(f"{k['ad']}: 'grup' metin olmalı")
+    # Uygulama her grubun başına bir başlık koyar; dağınık grup başlığı tekrarlar.
+    gruplar = [k.get("grup") for k in kanallar]
+    biten = set()
+    for onceki, grup in zip([None] + gruplar, gruplar):
+        if grup != onceki:
+            if grup in biten:
+                raise ValueError(f"'{grup}' grubunun kanalları art arda değil")
+            biten.add(onceki)
 
 
 def liste_uret(kanallar: list[dict], iptv_org: dict[str, list[Aday]], indir: Indirici,

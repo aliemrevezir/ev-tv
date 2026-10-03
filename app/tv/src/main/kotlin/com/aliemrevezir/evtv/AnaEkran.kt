@@ -15,7 +15,7 @@ import android.view.KeyEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import android.widget.ArrayAdapter
+import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ListView
@@ -98,7 +98,7 @@ class AnaEkran : Activity(), Oynatici.Dinleyici {
         listeGorunumu.setOnItemClickListener { _, _, konum, _ ->
             panelKapat()
             val s = secici ?: return@setOnItemClickListener
-            val kanal = listeUyarlayici.getItem(konum) ?: return@setOnItemClickListener
+            val kanal = listeUyarlayici.kanal(konum) ?: return@setOnItemClickListener
             if (kanal.no != s.gecerli.no) {
                 s.sec(kanal.no)
                 oynat(yeniKanal = true)
@@ -314,7 +314,7 @@ class AnaEkran : Activity(), Oynatici.Dinleyici {
 
     private fun panelAc() {
         val s = secici ?: return
-        val konum = s.kanallar.indexOfFirst { it.no == s.gecerli.no }
+        val konum = listeUyarlayici.konum(s.gecerli.no)
         panel.visibility = View.VISIBLE
         listeGorunumu.setItemChecked(konum, true)
         listeGorunumu.setSelection(konum)
@@ -344,17 +344,41 @@ class AnaEkran : Activity(), Oynatici.Dinleyici {
         mesaj.visibility = View.GONE
     }
 
-    private inner class KanalUyarlayici : ArrayAdapter<Kanal>(this, R.layout.kanal_ogesi) {
+    /** Kanallar ve her grubun başında seçilemeyen bir başlık; kumanda başlıkları atlar. */
+    private inner class KanalUyarlayici : BaseAdapter() {
+
+        private var satirlar: List<Any> = emptyList()
 
         fun yenile() {
-            clear()
-            addAll(secici?.kanallar.orEmpty())
+            satirlar = buildList {
+                var grup: String? = null
+                for (kanal in secici?.kanallar.orEmpty()) {
+                    val kanalGrubu = kanal.grup
+                    if (kanalGrubu != null && kanalGrubu != grup) add(kanalGrubu)
+                    grup = kanalGrubu
+                    add(kanal)
+                }
+            }
+            notifyDataSetChanged()
         }
 
+        fun kanal(konum: Int): Kanal? = satirlar.getOrNull(konum) as? Kanal
+
+        fun konum(no: Int): Int = satirlar.indexOfFirst { it is Kanal && it.no == no }
+
+        override fun getCount() = satirlar.size
+        override fun getItem(position: Int): Any = satirlar[position]
+        override fun getItemId(position: Int) = position.toLong()
+        override fun getViewTypeCount() = 2
+        override fun getItemViewType(position: Int) = if (satirlar[position] is Kanal) 0 else 1
+        override fun areAllItemsEnabled() = false
+        override fun isEnabled(position: Int) = satirlar[position] is Kanal
+
         override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-            val gorunum = (convertView ?: layoutInflater.inflate(R.layout.kanal_ogesi, parent, false)) as TextView
-            val kanal = getItem(position)!!
-            gorunum.text = getString(R.string.kanal_bilgisi, kanal.no, kanal.ad)
+            val satir = satirlar[position]
+            val duzen = if (satir is Kanal) R.layout.kanal_ogesi else R.layout.grup_basligi
+            val gorunum = (convertView ?: layoutInflater.inflate(duzen, parent, false)) as TextView
+            gorunum.text = if (satir is Kanal) getString(R.string.kanal_bilgisi, satir.no, satir.ad) else satir as String
             return gorunum
         }
     }

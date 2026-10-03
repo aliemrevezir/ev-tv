@@ -33,6 +33,12 @@ class ListeAyristiriciTest {
         assertEquals(listOf(Kanal(1, "A", "https://a", null)), ListeAyristirici.ayristir(json))
     }
 
+    @Test
+    fun `grup alani okunur`() {
+        val json = """{"kanallar": [{"no": 1, "ad": "NTV", "adres": "https://n", "grup": "Haber"}]}"""
+        assertEquals(listOf(Kanal(1, "NTV", "https://n", null, "Haber")), ListeAyristirici.ayristir(json))
+    }
+
     @Test(expected = ListeHatasi::class)
     fun `bozuk json hata verir`() {
         ListeAyristirici.ayristir("{bozuk")
