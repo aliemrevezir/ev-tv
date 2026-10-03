@@ -65,3 +65,17 @@
 - ad: Bloomberg HT
   adres: https://ciner.daioncdn.net/bloomberght/bloomberght_720p.m3u8
   logo: https://i.imgur.com/bmkXfIE.png
+# iptv-org'da yok. Adres ~3 saatlik imza istiyor; imzasız taban 403 verir
+# (durum: dogrulanamadi). Uygulamanın vekili açılışta imzalı adresi
+# cnnturk.com API'sinden alır (bkz. CnnTurk.kt).
+- ad: CNN Türk
+  adres: https://live.duhnet.tv/S2/HLS_LIVE/cnnturknp/playlist.m3u8
+  logo: https://static.cnnturk.com/images/cnnturk-logo.png
+# iptv-org'daki tek aday tv.ensonhaber.com aktarıcısı (Not 24/7); haberturk.com'un
+# kendi oynatıcısı ciner.daioncdn.net kullanıyor. 'app' sabit, token'sız açılıyor.
+- ad: Habertürk
+  adres: https://ciner.daioncdn.net/haberturktv/haberturktv_720p.m3u8?app=c98ab0b0-50cc-495b-bb37-778e91f5ff5b&ce=3
+  logo: https://i.imgur.com/6Tw3rUp.png
+- ad: Bengütürk
+  iptv_org: BenguturkTV.tr
+  adres_filtresi: ensonhaber.com

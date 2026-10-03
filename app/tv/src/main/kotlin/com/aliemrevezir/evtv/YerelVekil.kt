@@ -1,6 +1,7 @@
 package com.aliemrevezir.evtv
 
 import android.util.Log
+import com.aliemrevezir.evtv.cekirdek.CnnTurk
 import com.aliemrevezir.evtv.cekirdek.ListeKirpici
 import java.io.IOException
 import java.io.OutputStream
@@ -104,7 +105,7 @@ class YerelVekil(private val userAgent: String, tlsUret: () -> SSLSocketFactory)
     }
 
     private fun listeIndir(kaynak: String): String {
-        val baglanti = ac(kaynak)
+        val baglanti = ac(if (CnnTurk.tabanMi(kaynak)) cnnTurkAdresi() else kaynak)
         try {
             val kod = baglanti.responseCode
             if (kod != HttpURLConnection.HTTP_OK) throw IOException("HTTP $kod")
@@ -114,6 +115,27 @@ class YerelVekil(private val userAgent: String, tlsUret: () -> SSLSocketFactory)
         } finally {
             baglanti.disconnect()
         }
+    }
+
+    @Volatile private var cnnTurkImzali: String? = null
+
+    /** Son imzalı adres bitmesine [IMZA_PAYI_SN]'den fazla varsa onu, yoksa API'den yenisini verir. */
+    private fun cnnTurkAdresi(): String {
+        val simdi = System.currentTimeMillis() / 1000
+        cnnTurkImzali?.let { eski ->
+            if ((CnnTurk.bitis(eski) ?: 0) - simdi > IMZA_PAYI_SN) return eski
+        }
+        val baglanti = ac(CnnTurk.API)
+        val yeni = try {
+            val kod = baglanti.responseCode
+            if (kod != HttpURLConnection.HTTP_OK) throw IOException("CNN TÜRK API: HTTP $kod")
+            CnnTurk.adresCikar(baglanti.inputStream.bufferedReader().use { it.readText() })
+                ?: throw IOException("CNN TÜRK API: yanıtta adres yok")
+        } finally {
+            baglanti.disconnect()
+        }
+        cnnTurkImzali = yeni
+        return yeni
     }
 
     /** Segmenti indirirken VLC'ye akıtır; kaynağın durum kodu ve aralık bilgisi aynen iletilir. */
@@ -164,5 +186,8 @@ class YerelVekil(private val userAgent: String, tlsUret: () -> SSLSocketFactory)
         const val TAMPON = 64 * 1024
         // 6 sn'lik segmentlerle ~1 dk; 3 sn'lik önbelleğe fazlasıyla yeter.
         const val TUTULAN_SEGMENT = 10
+        // Kanal açıkken imza biterse alt listeler 403 verir ve kanal yeniden açılır;
+        // açılışta en az bu kadar ömrü kalmış imza kullanılır.
+        const val IMZA_PAYI_SN = 30 * 60
     }
 }
