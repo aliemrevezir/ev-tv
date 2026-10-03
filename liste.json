@@ -1,6 +1,6 @@
 {
   "surum": 1,
-  "uretildi": "2026-10-03T00:21:37Z",
+  "uretildi": "2026-10-03T04:20:52Z",
   "kanallar": [
     {
       "no": 1,
@@ -19,7 +19,7 @@
     {
       "no": 3,
       "ad": "Kanal D",
-      "adres": "https://demiroren.daioncdn.net/kanald/kanald_720p.m3u8?&sid=8svn1v2l80le&app=da2109ea-5dfe-4107-89ab-23593336ed61&ce=3",
+      "adres": "https://demiroren.daioncdn.net/kanald/kanald_720p.m3u8?&sid=8sw8e76x53jc&app=da2109ea-5dfe-4107-89ab-23593336ed61&ce=3",
       "logo": "https://i.imgur.com/9o1atM6.png",
       "durum": "ok"
     },
@@ -40,7 +40,7 @@
     {
       "no": 6,
       "ad": "TV8",
-      "adres": "https://tv8.daioncdn.net/tv8/tv8_720p.m3u8?&sid=8svn1zdu0dqd&app=7ddc255a-ef47-4e81-ab14-c0e5f2949788&ce=3",
+      "adres": "https://tv8.daioncdn.net/tv8/tv8_720p.m3u8?&sid=8sw8efdpifkb&app=7ddc255a-ef47-4e81-ab14-c0e5f2949788&ce=3",
       "logo": "https://upload.wikimedia.org/wikipedia/tr/thumb/6/68/Tv8_Yeni_Logo.png/960px-Tv8_Yeni_Logo.png",
       "durum": "ok"
     },
@@ -103,7 +103,7 @@
     {
       "no": 16,
       "ad": "NTV",
-      "adres": "https://dogus.daioncdn.net/ntv/ntv_720p.m3u8?&sid=8svn2a6kley8&app=c68bddbe-3dbf-49f7-892a-93de5ae37f1f&ce=2",
+      "adres": "https://dogus.daioncdn.net/ntv/ntv_720p.m3u8?&sid=8sw8eqpr55sq&app=c68bddbe-3dbf-49f7-892a-93de5ae37f1f&ce=2",
       "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/NTV_%28Turkey%29_logo.svg/960px-NTV_%28Turkey%29_logo.svg.png",
       "durum": "ok"
     },

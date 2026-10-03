@@ -1,4 +1,4 @@
-Üretildi: 2026-10-03T00:21:37Z
+Üretildi: 2026-10-03T04:20:52Z
 
 iptv-org listesi: https://iptv-org.github.io/iptv/countries/tr.m3u
 iptv-org listesi: https://raw.githubusercontent.com/iptv-org/iptv/master/streams/tr.m3u
@@ -7,13 +7,13 @@ iptv-org listesi: https://raw.githubusercontent.com/iptv-org/iptv/master/streams
 2. ATV
   ok: https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/atv/atv_1080p.m3u8
 3. Kanal D
-  ok: https://demiroren.daioncdn.net/kanald/kanald_720p.m3u8?&sid=8svn1v2l80le&app=da2109ea-5dfe-4107-89ab-23593336ed61&ce=3
+  ok: https://demiroren.daioncdn.net/kanald/kanald_720p.m3u8?&sid=8sw8e76x53jc&app=da2109ea-5dfe-4107-89ab-23593336ed61&ce=3
 4. Star TV
   ok: https://dogus.daioncdn.net/startv/startv_720p.m3u8?app=a20ac41e-bdc3-4aa1-934d-26b484480ac9&ce=3&sid=8l4w3lst4co5
 5. NOW
   ok: https://uycyyuuzyh.turknet.ercdn.net/nphindgytw/nowtv/nowtv_720p.m3u8
 6. TV8
-  ok: https://tv8.daioncdn.net/tv8/tv8_720p.m3u8?&sid=8svn1zdu0dqd&app=7ddc255a-ef47-4e81-ab14-c0e5f2949788&ce=3
+  ok: https://tv8.daioncdn.net/tv8/tv8_720p.m3u8?&sid=8sw8efdpifkb&app=7ddc255a-ef47-4e81-ab14-c0e5f2949788&ce=3
 7. Kanal 7
   https://kanal7.blutv.com/blutv_kanal7_live/live.m3u8: SSLError
   ok: https://kanal7-live.daioncdn.net/kanal7/kanal7_720p.m3u8
@@ -35,7 +35,7 @@ Beyaz TV: çalışan adres yok, listeye alınmadı
 15. A Haber
   ok: https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/ahaber/ahaber_720p.m3u8
 16. NTV
-  ok: https://dogus.daioncdn.net/ntv/ntv_720p.m3u8?&sid=8svn2a6kley8&app=c68bddbe-3dbf-49f7-892a-93de5ae37f1f&ce=2
+  ok: https://dogus.daioncdn.net/ntv/ntv_720p.m3u8?&sid=8sw8eqpr55sq&app=c68bddbe-3dbf-49f7-892a-93de5ae37f1f&ce=2
 17. Halk TV
   ok: https://halktv-live.daioncdn.net/halktv/halktv_720p.m3u8
 18. TGRT Haber
