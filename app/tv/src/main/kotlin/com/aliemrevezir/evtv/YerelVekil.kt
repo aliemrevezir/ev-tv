@@ -1,8 +1,11 @@
 package com.aliemrevezir.evtv
 
 import android.util.Log
+import com.aliemrevezir.evtv.cekirdek.Atv
 import com.aliemrevezir.evtv.cekirdek.CnnTurk
+import com.aliemrevezir.evtv.cekirdek.ImzaliKaynak
 import com.aliemrevezir.evtv.cekirdek.ListeKirpici
+import com.aliemrevezir.evtv.cekirdek.imzaBitisi
 import java.io.IOException
 import java.io.OutputStream
 import java.net.HttpURLConnection
@@ -12,6 +15,7 @@ import java.net.Socket
 import java.net.URL
 import java.net.URLDecoder
 import java.net.URLEncoder
+import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.Executors
 import javax.net.ssl.HttpsURLConnection
 import javax.net.ssl.SSLSocketFactory
@@ -105,7 +109,8 @@ class YerelVekil(private val userAgent: String, tlsUret: () -> SSLSocketFactory)
     }
 
     private fun listeIndir(kaynak: String): String {
-        val baglanti = ac(if (CnnTurk.tabanMi(kaynak)) cnnTurkAdresi() else kaynak)
+        val imzali = IMZALI_KAYNAKLAR.firstOrNull { it.tabanMi(kaynak) }
+        val baglanti = ac(if (imzali != null) imzaliAdres(imzali) else kaynak)
         try {
             val kod = baglanti.responseCode
             if (kod != HttpURLConnection.HTTP_OK) throw IOException("HTTP $kod")
@@ -117,24 +122,25 @@ class YerelVekil(private val userAgent: String, tlsUret: () -> SSLSocketFactory)
         }
     }
 
-    @Volatile private var cnnTurkImzali: String? = null
+    private val imzaliAdresler = ConcurrentHashMap<ImzaliKaynak, String>()
 
     /** Son imzalı adres bitmesine [IMZA_PAYI_SN]'den fazla varsa onu, yoksa API'den yenisini verir. */
-    private fun cnnTurkAdresi(): String {
+    private fun imzaliAdres(kaynak: ImzaliKaynak): String {
         val simdi = System.currentTimeMillis() / 1000
-        cnnTurkImzali?.let { eski ->
-            if ((CnnTurk.bitis(eski) ?: 0) - simdi > IMZA_PAYI_SN) return eski
+        imzaliAdresler[kaynak]?.let { eski ->
+            if ((imzaBitisi(eski) ?: 0) - simdi > IMZA_PAYI_SN) return eski
         }
-        val baglanti = ac(CnnTurk.API)
+        val baglanti = ac(kaynak.api)
+        kaynak.referer?.let { baglanti.setRequestProperty("Referer", it) }
         val yeni = try {
             val kod = baglanti.responseCode
-            if (kod != HttpURLConnection.HTTP_OK) throw IOException("CNN TÜRK API: HTTP $kod")
-            CnnTurk.adresCikar(baglanti.inputStream.bufferedReader().use { it.readText() })
-                ?: throw IOException("CNN TÜRK API: yanıtta adres yok")
+            if (kod != HttpURLConnection.HTTP_OK) throw IOException("${kaynak.api}: HTTP $kod")
+            kaynak.adresCikar(baglanti.inputStream.bufferedReader().use { it.readText() })
+                ?: throw IOException("${kaynak.api}: yanıtta adres yok")
         } finally {
             baglanti.disconnect()
         }
-        cnnTurkImzali = yeni
+        imzaliAdresler[kaynak] = yeni
         return yeni
     }
 
@@ -182,6 +188,7 @@ class YerelVekil(private val userAgent: String, tlsUret: () -> SSLSocketFactory)
 
     private companion object {
         const val ETIKET = "EvTV"
+        val IMZALI_KAYNAKLAR = listOf(CnnTurk, Atv)
         const val ZAMAN_ASIMI_MS = 10_000
         const val TAMPON = 64 * 1024
         // 6 sn'lik segmentlerle ~1 dk; 3 sn'lik önbelleğe fazlasıyla yeter.

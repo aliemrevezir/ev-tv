@@ -14,10 +14,14 @@
   grup: Ulusal
   iptv_org: TRT1.tr
   adres_filtresi: trt.com.tr
+# iptv-org'daki turknet.ercdn.net aktarıcısı 2026-10-05'te zaman aşımına düştü.
+# Resmi yayın ~11 saatlik, IP'ye bağlı imza istiyor; imzasız taban 403 verir
+# (durum: dogrulanamadi). Uygulamanın vekili imzayı atv.com.tr'nin kullandığı
+# tmgrup token servisinden alır (bkz. Atv.kt).
 - ad: ATV
   grup: Ulusal
-  iptv_org: ATV.tr
-  adres_filtresi: ercdn.net
+  adres: https://trkvz-live.ercdn.net/atvhd/atvhd_720p.m3u8
+  logo: https://i.imgur.com/HyVUwFC.png
 - ad: Kanal D
   grup: Ulusal
   iptv_org: KanalD.tr
