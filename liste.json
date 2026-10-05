@@ -1,6 +1,6 @@
 {
   "surum": 1,
-  "uretildi": "2026-10-05T04:39:41Z",
+  "uretildi": "2026-10-05T18:42:47Z",
   "kanallar": [
     {
       "no": 1,
@@ -13,15 +13,15 @@
     {
       "no": 2,
       "ad": "ATV",
-      "adres": "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/atv/atv_1080p.m3u8",
+      "adres": "https://trkvz-live.ercdn.net/atvhd/atvhd_720p.m3u8",
       "logo": "https://i.imgur.com/HyVUwFC.png",
-      "durum": "ok",
+      "durum": "dogrulanamadi",
       "grup": "Ulusal"
     },
     {
       "no": 3,
       "ad": "Kanal D",
-      "adres": "https://demiroren.daioncdn.net/kanald/kanald_720p.m3u8?&sid=8t3ezguq1ktw&app=da2109ea-5dfe-4107-89ab-23593336ed61&ce=3",
+      "adres": "https://demiroren.daioncdn.net/kanald/kanald_720p.m3u8?&sid=8t5i6ytbnkd8&app=da2109ea-5dfe-4107-89ab-23593336ed61&ce=3",
       "logo": "https://i.imgur.com/9o1atM6.png",
       "durum": "ok",
       "grup": "Ulusal"
@@ -45,7 +45,7 @@
     {
       "no": 6,
       "ad": "TV8",
-      "adres": "https://tv8.daioncdn.net/tv8/tv8_720p.m3u8?&sid=8t3f06bvqo5f&app=7ddc255a-ef47-4e81-ab14-c0e5f2949788&ce=3",
+      "adres": "https://tv8.daioncdn.net/tv8/tv8_720p.m3u8?&sid=8t5i7phpru24&app=7ddc255a-ef47-4e81-ab14-c0e5f2949788&ce=3",
       "logo": "https://upload.wikimedia.org/wikipedia/tr/thumb/6/68/Tv8_Yeni_Logo.png/960px-Tv8_Yeni_Logo.png",
       "durum": "ok",
       "grup": "Ulusal"
@@ -85,7 +85,7 @@
     {
       "no": 12,
       "ad": "NTV",
-      "adres": "https://dogus.daioncdn.net/ntv/ntv_720p.m3u8?&sid=8t3f0clwa49f&app=c68bddbe-3dbf-49f7-892a-93de5ae37f1f&ce=2",
+      "adres": "https://dogus.daioncdn.net/ntv/ntv_720p.m3u8?&sid=8t5i7zol8xwz&app=c68bddbe-3dbf-49f7-892a-93de5ae37f1f&ce=2",
       "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/NTV_%28Turkey%29_logo.svg/960px-NTV_%28Turkey%29_logo.svg.png",
       "durum": "ok",
       "grup": "Haber"
@@ -167,7 +167,7 @@
       "ad": "TRT Çocuk",
       "adres": "https://tv-trtcocuk.medya.trt.com.tr/master_720.m3u8",
       "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/TRT_%C3%87ocuk_logo_%282021%29.svg/960px-TRT_%C3%87ocuk_logo_%282021%29.svg.png",
-      "durum": "ok",
+      "durum": "dogrulanamadi",
       "grup": "Tematik"
     },
     {
